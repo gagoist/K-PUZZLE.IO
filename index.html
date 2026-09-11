@@ -98,6 +98,93 @@
     </section>
   </div>
 
+  <footer class="site-footer">
+    <p class="site-footer-copy">© 2026 K-PUZZLE.IO. All rights reserved.</p>
+    <p class="site-footer-disclaimer">This is an unofficial, fan-made interactive puzzle platform for global K-culture fans. All artist names, drama titles, and related trademarks belong to their respective entertainment agencies.</p>
+    <nav class="site-footer-links" aria-label="Legal">
+      <span>Disclaimer</span>
+      <span class="site-footer-sep" aria-hidden="true">|</span>
+      <button type="button" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-modal">Privacy Policy</button>
+      <span class="site-footer-sep" aria-hidden="true">|</span>
+      <button type="button" id="open-contact" aria-haspopup="dialog" aria-controls="contact-modal">Contact Us</button>
+    </nav>
+  </footer>
+
+  <div id="privacy-modal" class="site-modal hidden" hidden role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="site-modal-card site-modal-card--wide">
+      <header class="site-modal-head">
+        <h2 id="privacy-title">Privacy Policy</h2>
+        <button type="button" class="site-modal-close" data-close-modal aria-label="Close">Close</button>
+      </header>
+      <div class="site-modal-body">
+        <p class="site-modal-updated">Last updated: September 11, 2026</p>
+        <p>K-PUZZLE.IO (“we”, “our”, or “the site”) is a fan-made Hangul crossword platform. This policy explains what information we collect, how cookies and advertising may be used, and the choices you have. Using the site means you agree to this policy.</p>
+
+        <h3>Information we collect</h3>
+        <p>We do not require an account. We may collect:</p>
+        <ul>
+          <li><strong>Play data stored on your device.</strong> Puzzle clear times and similar progress may be saved in your browser’s local storage so your rank and history can be shown on this device.</li>
+          <li><strong>Messages you send us.</strong> If you use Contact Us, we receive the email address you provide (so we can reply) and the contents of your message.</li>
+          <li><strong>Technical data.</strong> Standard server or advertising logs may include IP address, browser type, device type, referring URL, and pages viewed.</li>
+        </ul>
+
+        <h3>Cookies and similar technologies</h3>
+        <p>Cookies are small text files stored on your device. We and our partners may use cookies, pixels, and local storage to run the site, remember preferences, measure traffic, and show ads.</p>
+        <p>You can control cookies in your browser settings. Blocking some cookies may limit features such as saved progress or personalized ads.</p>
+
+        <h3>Google AdSense and advertising cookies</h3>
+        <p>This site uses Google AdSense to display advertisements. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites.</p>
+        <p>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the Internet.</p>
+        <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. You can also opt out of some third-party vendors’ use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a>.</p>
+        <p>How Google uses data from sites or apps that use its services is described here: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google Advertising Policies</a>.</p>
+        <p>These vendors may collect data such as your IP address, cookie identifiers, and browsing activity on this and other sites to show relevant ads, limit how often you see an ad, and measure ad performance.</p>
+
+        <h3>How we use information</h3>
+        <ul>
+          <li>To operate, maintain, and improve K-PUZZLE.IO</li>
+          <li>To respond to inquiries sent through Contact Us</li>
+          <li>To remember gameplay progress on your device</li>
+          <li>To show ads and understand how the site is used</li>
+        </ul>
+        <p>We do not sell your personal information.</p>
+
+        <h3>Third-party services</h3>
+        <p>Google and other advertising or infrastructure partners process data under their own policies. We do not control those third-party cookies or how those companies use the data they collect.</p>
+
+        <h3>Children</h3>
+        <p>K-PUZZLE.IO is intended for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+        <h3>Changes</h3>
+        <p>We may update this policy from time to time. The “Last updated” date at the top will change when we do. Continued use of the site after an update means you accept the revised policy.</p>
+
+        <h3>Contact</h3>
+        <p>Questions about this policy or your data can be sent with the Contact Us link in the site footer. Please include a reply email so we can respond.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact-modal" class="site-modal hidden" hidden role="dialog" aria-modal="true" aria-labelledby="contact-title">
+    <div class="site-modal-card">
+      <header class="site-modal-head">
+        <h2 id="contact-title">Contact Us</h2>
+        <button type="button" class="site-modal-close" data-close-modal aria-label="Close">Close</button>
+      </header>
+      <form id="contact-form" class="contact-form" novalidate>
+        <label class="contact-field">
+          <span>Your email</span>
+          <input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@email.com">
+        </label>
+        <label class="contact-field">
+          <span>Message</span>
+          <textarea id="contact-message" name="message" required rows="5" placeholder="A question, bug, or idea…"></textarea>
+        </label>
+        <input class="contact-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p id="contact-status" class="contact-status" role="status"></p>
+        <button id="contact-submit" class="primary contact-submit" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
   <div id="win" class="win hidden" hidden role="dialog" aria-modal="true" aria-labelledby="win-title">
     <canvas id="fireworks" class="fireworks" aria-hidden="true"></canvas>
     <div class="win-card">

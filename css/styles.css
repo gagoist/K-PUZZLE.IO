@@ -26,6 +26,9 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
   font-family: "Outfit", "Noto Sans KR", sans-serif;
   color: var(--ink);
   background:
@@ -69,9 +72,10 @@ button {
 }
 
 #app {
+  flex: 1 0 auto;
   width: min(1240px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 64px;
+  padding: 28px 0 40px;
 }
 
 #app:has(#game:not([hidden])) {
@@ -700,6 +704,236 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
   color: var(--muted);
 }
 
+.site-footer {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: auto;
+  padding: 18px 20px calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  max-width: 52rem;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #888;
+}
+
+.site-footer-copy {
+  letter-spacing: 0.02em;
+}
+
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #888;
+}
+
+.site-footer-links button {
+  margin: 0;
+  border: 0;
+  padding: 0 2px;
+  background: transparent;
+  color: #888;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.site-footer-links button:hover,
+.site-footer-links button:focus-visible {
+  color: #bbb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer-sep {
+  margin: 0 8px;
+  color: #666;
+}
+
+.site-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(5, 4, 10, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.site-modal-card {
+  position: relative;
+  width: min(420px, 100%);
+  max-height: min(86vh, 640px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  padding: 22px 22px 20px;
+  background: linear-gradient(180deg, rgba(28, 20, 44, 0.96), rgba(12, 10, 20, 0.98));
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  animation: win-pop 0.45s cubic-bezier(0.2, 1.2, 0.32, 1);
+}
+
+.site-modal-card--wide {
+  width: min(560px, 100%);
+  max-height: min(88vh, 720px);
+}
+
+.site-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.site-modal-head h2 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.site-modal-close {
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.site-modal-close:hover,
+.site-modal-close:focus-visible {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+
+.site-modal-body {
+  min-height: 0;
+  overflow: auto;
+  padding-right: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.site-modal-body h3 {
+  margin: 18px 0 6px;
+  color: var(--ink);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.site-modal-body p,
+.site-modal-body ul {
+  margin: 0 0 10px;
+}
+
+.site-modal-body ul {
+  padding-left: 1.15em;
+}
+
+.site-modal-body a {
+  color: var(--accent-2);
+}
+
+.site-modal-updated {
+  margin-bottom: 12px !important;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-field {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 11px 14px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--card) 80%, black);
+  font: inherit;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 112px;
+  line-height: 1.5;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: rgba(246, 241, 255, 0.38);
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent) 65%, var(--line));
+}
+
+.contact-honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-status {
+  min-height: 18px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--accent-2);
+}
+
+.contact-status.is-error {
+  color: var(--bad);
+}
+
+.contact-submit {
+  width: 100%;
+}
+
+.contact-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
 .win {
   position: fixed;
   inset: 0;
@@ -966,6 +1200,10 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
+
+  body:has(#game:not([hidden])) .site-footer {
+    display: none;
   }
 
   #game {

@@ -881,3 +881,136 @@ function burst(x, y, color) {
 }
 
 window.addEventListener("resize", onPlayResize);
+
+const legalModals = {
+  privacy: document.querySelector("#privacy-modal"),
+  contact: document.querySelector("#contact-modal"),
+};
+const contactForm = document.querySelector("#contact-form");
+const contactEmail = document.querySelector("#contact-email");
+const contactMessage = document.querySelector("#contact-message");
+const contactStatus = document.querySelector("#contact-status");
+const contactSubmit = document.querySelector("#contact-submit");
+const CONTACT_ENDPOINT = "https://formsubmit.co/ajax/accb560be3fe9cbf6a6822903a1f60db";
+let legalLastFocus = null;
+let contactCloseTimer = 0;
+
+function openLegalModal(modal) {
+  if (!modal) return;
+  closeLegalModals();
+  legalLastFocus = document.activeElement;
+  modal.hidden = false;
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  const focusTarget =
+    modal.querySelector("input:not(.contact-honey), textarea") ||
+    modal.querySelector(".site-modal-close");
+  if (focusTarget) focusTarget.focus();
+}
+
+function closeLegalModals() {
+  Object.values(legalModals).forEach((modal) => {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    modal.classList.add("hidden");
+  });
+  document.body.style.overflow = "";
+  clearTimeout(contactCloseTimer);
+  if (legalLastFocus && typeof legalLastFocus.focus === "function") {
+    legalLastFocus.focus();
+  }
+  legalLastFocus = null;
+}
+
+function resetContactForm() {
+  contactForm.reset();
+  contactStatus.textContent = "";
+  contactStatus.classList.remove("is-error");
+  contactSubmit.disabled = false;
+  contactSubmit.textContent = "Send";
+}
+
+function setContactStatus(message, isError) {
+  contactStatus.textContent = message;
+  contactStatus.classList.toggle("is-error", Boolean(isError));
+}
+
+document.querySelector("#open-privacy")?.addEventListener("click", () => {
+  openLegalModal(legalModals.privacy);
+});
+
+document.querySelector("#open-contact")?.addEventListener("click", () => {
+  resetContactForm();
+  openLegalModal(legalModals.contact);
+});
+
+document.querySelectorAll("[data-close-modal]").forEach((button) => {
+  button.addEventListener("click", closeLegalModals);
+});
+
+Object.values(legalModals).forEach((modal) => {
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) closeLegalModals();
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  if ([legalModals.privacy, legalModals.contact].some((modal) => modal && !modal.hidden)) {
+    closeLegalModals();
+  }
+});
+
+contactForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const honey = contactForm.querySelector("[name='_honey']")?.value?.trim();
+  if (honey) return;
+
+  const email = contactEmail.value.trim();
+  const message = contactMessage.value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setContactStatus("Please enter a valid email address.", true);
+    contactEmail.focus();
+    return;
+  }
+  if (!message) {
+    setContactStatus("Please write a message.", true);
+    contactMessage.focus();
+    return;
+  }
+
+  contactSubmit.disabled = true;
+  contactSubmit.textContent = "Sending…";
+  setContactStatus("");
+
+  try {
+    const response = await fetch(CONTACT_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        message,
+        _replyto: email,
+        _subject: "K-PUZZLE.IO contact",
+        _template: "table",
+        _captcha: false,
+      }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    const ok = response.ok && String(payload.success) !== "false";
+    if (!ok) throw new Error("submit-failed");
+    setContactStatus("Thank you for your message!");
+    contactSubmit.textContent = "Sent";
+    contactCloseTimer = window.setTimeout(() => {
+      closeLegalModals();
+      resetContactForm();
+    }, 1400);
+  } catch (error) {
+    setContactStatus("Couldn't send right now. Please try again.", true);
+    contactSubmit.disabled = false;
+    contactSubmit.textContent = "Send";
+  }
+});
