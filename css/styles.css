@@ -87,6 +87,25 @@ button {
   align-items: flex-start;
 }
 
+.game-timer,
+.hud-shuffle,
+.play-clue,
+.clues-close {
+  display: none;
+}
+
+.clues-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.clues-head h2 {
+  margin: 0;
+}
+
 .brand {
   display: flex;
   flex-direction: column;
@@ -564,12 +583,17 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
 }
 
 .side-card h2,
+.clues-head h2,
 .bank-head {
   margin: 0 0 12px;
   font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent-2);
+}
+
+.clues-head h2 {
+  margin: 0;
 }
 
 .clue-list {
@@ -918,5 +942,356 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
     height: 44px;
     flex-basis: 44px;
     font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  html:has(#game:not([hidden])),
+  body:has(#game:not([hidden])) {
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  body:has(#game:not([hidden])) {
+    background-attachment: scroll;
+  }
+
+  #app:has(#game:not([hidden])) {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #game {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding:
+      calc(6px + env(safe-area-inset-top, 0px))
+      8px
+      calc(8px + env(safe-area-inset-bottom, 0px));
+    overflow: hidden;
+  }
+
+  #game .game-top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "back timer shuffle";
+    align-items: center;
+    gap: 8px;
+    flex-direction: unset;
+    flex-shrink: 0;
+    padding: 2px 2px 8px;
+  }
+
+  #game .game-top-main {
+    display: contents;
+  }
+
+  #game #back-btn {
+    grid-area: back;
+    min-height: 36px;
+    padding: 6px 4px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  #game .game-top h1,
+  #game .topic-hangul,
+  #game .vibe,
+  #game #progress {
+    display: none;
+  }
+
+  #game .game-timer {
+    display: block;
+    grid-area: timer;
+    justify-self: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+
+  #game .hud-shuffle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: shuffle;
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  #game .game-shell {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "board"
+      "bank";
+    gap: 8px;
+    margin-top: 0;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  #game .board-card,
+  #game .bank-card,
+  #game .side-card {
+    border-radius: 18px;
+  }
+
+  #game .board-card {
+    grid-area: board;
+    min-height: 0;
+    padding: 8px 8px 6px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #game .board-topic,
+  #game .status {
+    display: none;
+  }
+
+  #game .crossword {
+    --gap: 2px;
+    flex: 1 1 auto;
+    align-self: center;
+    min-height: 0;
+    min-width: 0;
+    width: min(100%, calc(var(--cols) * var(--cell) + (var(--cols) - 1) * var(--gap)));
+    max-height: 100%;
+    margin: 0 auto;
+    align-content: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #game .crossword[data-level="beginner"],
+  #game .crossword[data-level="intermediate"],
+  #game .crossword[data-level="advanced"] {
+    --gap: 2px;
+  }
+
+  #game .cell {
+    border-radius: 6px;
+    padding: 7px 0 0;
+    font-size: clamp(9px, calc(42cqw / var(--cols)), 16px);
+  }
+
+  #game .cell.selected,
+  #game .cell.in-word {
+    outline-width: 2px;
+  }
+
+  #game .cell .num {
+    top: 2px;
+    left: 3px;
+    font-size: 8px;
+  }
+
+  #game .crossword.dense .cell {
+    border-radius: 5px;
+    padding: 6px 0 0;
+  }
+
+  #game .play-clue {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px;
+    align-items: stretch;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  #game .active-clue {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 8px;
+    row-gap: 2px;
+    align-items: start;
+    min-height: 44px;
+    max-height: 4.6em;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+    border-radius: 14px;
+    padding: 7px 10px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  #game .active-clue-meta {
+    grid-column: 1;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    white-space: nowrap;
+  }
+
+  #game .active-clue-meta b {
+    font-size: 13px;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  #game .active-clue .topic-tag {
+    grid-column: 1 / -1;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+
+  #game .active-clue-text {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+  }
+
+  #game .active-clue.prompt .active-clue-text,
+  #game .active-clue.message .active-clue-text {
+    grid-column: 1 / -1;
+  }
+
+  #game .active-clue.correct {
+    border-color: color-mix(in srgb, var(--ok) 55%, var(--line));
+    color: var(--ok);
+  }
+
+  #game .clues-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 52px;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  #game .clues-toggle[aria-expanded="true"] {
+    border-color: color-mix(in srgb, var(--accent) 65%, white);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  #game .bank-card {
+    grid-area: bank;
+    padding: 8px 8px 6px;
+    flex-shrink: 0;
+  }
+
+  #game .bank-head {
+    display: none;
+  }
+
+  #game .bank {
+    justify-content: center;
+    gap: 4px;
+    max-height: 112px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #game .tile {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 8px;
+    font-size: 15px;
+    touch-action: manipulation;
+  }
+
+  #game .side-card {
+    display: none;
+    grid-area: board;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    bottom: 8px;
+    z-index: 12;
+    max-height: none;
+    padding: 12px;
+    overflow: hidden;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+  }
+
+  #game .side-card.is-open {
+    display: flex;
+  }
+
+  #game .clues-head {
+    flex-shrink: 0;
+    margin: 0 0 8px;
+  }
+
+  #game .clues-close {
+    display: inline-flex;
+    font-size: 13px;
+  }
+
+  #game .clue-list,
+  #game .clue-list.split {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    gap: 4px;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #game .clue {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  #game .cell,
+  #game .tile,
+  #game .clue,
+  #game .clues-toggle,
+  #game .hud-shuffle,
+  #game #back-btn {
+    touch-action: manipulation;
   }
 }

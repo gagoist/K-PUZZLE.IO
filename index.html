@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>K-PUZZLE.IO — Hangul Crossword</title>
   <meta name="description" content="Hangul crossword puzzles for K-POP and K-Drama fans. Clear a topic, then share your time.">
   <meta property="og:title" content="K-PUZZLE.IO — Hangul Crossword">
@@ -55,13 +55,15 @@
 
     <section id="game" class="hidden" hidden>
       <header class="game-top">
-        <div>
+        <div class="game-top-main">
           <button id="back-btn" class="ghost" type="button">← Topics</button>
           <h1 id="topic-title"></h1>
           <p id="topic-hangul" class="topic-hangul"></p>
           <p id="topic-vibe" class="vibe"></p>
         </div>
+        <time id="game-timer" class="game-timer" aria-label="Elapsed time">0:00</time>
         <p id="progress" class="progress pill"></p>
+        <button id="hud-shuffle" class="shuffle hud-shuffle" type="button">Shuffle</button>
       </header>
 
       <div class="game-shell">
@@ -76,11 +78,20 @@
         <section class="board-card">
           <p id="board-topic" class="board-topic"></p>
           <div id="board" class="crossword"></div>
+          <div class="play-clue">
+            <div id="active-clue" class="active-clue" role="status" aria-live="polite"></div>
+            <button id="clues-toggle" class="clues-toggle" type="button" aria-expanded="false" aria-controls="clues">
+              Clues
+            </button>
+          </div>
           <p id="status" class="status"></p>
         </section>
 
-        <aside class="side-card">
-          <h2>Clues</h2>
+        <aside class="side-card" id="side-card">
+          <div class="clues-head">
+            <h2>Clues</h2>
+            <button id="clues-close" class="ghost clues-close" type="button">Close</button>
+          </div>
           <div id="clues" class="clue-list"></div>
         </aside>
       </div>

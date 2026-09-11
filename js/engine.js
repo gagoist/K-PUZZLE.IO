@@ -90,7 +90,7 @@ function getWordCells(word) {
   return word.answer.map((_, index) => cellAt(word, index));
 }
 
-function wordsAt(session, r, c) {
+function wordsAtCell(session, r, c) {
   const cell = session.grid[r]?.[c];
   if (!cell) return [];
   return session.puzzle.words.filter((word) => cell.wordIds.includes(word.id));
@@ -101,7 +101,7 @@ function getSelectedWord(session) {
 }
 
 function selectCell(session, r, c) {
-  const options = wordsAt(session, r, c);
+  const options = wordsAtCell(session, r, c);
   if (!options.length) return session;
 
   let word = options.find((item) => item.id === session.selectedWordId);

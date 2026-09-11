@@ -23,8 +23,14 @@ const els = {
   topicHangul: document.querySelector("#topic-hangul"),
   topicVibe: document.querySelector("#topic-vibe"),
   progress: document.querySelector("#progress"),
+  timer: document.querySelector("#game-timer"),
+  hudShuffle: document.querySelector("#hud-shuffle"),
   boardTopic: document.querySelector("#board-topic"),
   board: document.querySelector("#board"),
+  activeClue: document.querySelector("#active-clue"),
+  cluesToggle: document.querySelector("#clues-toggle"),
+  cluesClose: document.querySelector("#clues-close"),
+  sideCard: document.querySelector("#side-card"),
   clues: document.querySelector("#clues"),
   bank: document.querySelector("#bank"),
   shuffle: document.querySelector("#shuffle-btn"),
@@ -43,6 +49,9 @@ const els = {
 
 const TIMES_KEY = "kpuzzle:clears";
 const MEDIAN_SECONDS = { beginner: 75, intermediate: 160, advanced: 340 };
+const MOBILE_MQ = window.matchMedia("(max-width: 768px)");
+let playTimerId = 0;
+let resizeTimerId = 0;
 const THEME_ART = {
   "k-pop": ["img/themes/kpop-1.png", "img/themes/kpop-2.png", "img/themes/kpop-3.png"],
   "k-drama": ["img/themes/kdrama-1.png", "img/themes/kdrama-2.png", "img/themes/kdrama-3.png"],
@@ -83,14 +92,24 @@ function boot() {
   els.topicSearch.addEventListener("input", () => {
     if (state.theme) renderTopics();
   });
-  els.shuffle.addEventListener("click", () => {
-    if (state.won) return;
-    state.session = shuffleBank(state.session);
-    renderGame();
+  els.shuffle.addEventListener("click", shuffleLetters);
+  els.hudShuffle.addEventListener("click", shuffleLetters);
+  els.cluesToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleCluesPanel();
+  });
+  els.cluesClose.addEventListener("click", closeCluesPanel);
+  els.sideCard.addEventListener("click", (event) => event.stopPropagation());
+  document.addEventListener("click", (event) => {
+    if (!els.sideCard.classList.contains("is-open")) return;
+    if (els.sideCard.contains(event.target) || els.cluesToggle.contains(event.target)) return;
+    closeCluesPanel();
   });
   els.retryBtn.addEventListener("click", retryPuzzle);
   els.shareBtn.addEventListener("click", toggleShareMenu);
   els.shareMenu.addEventListener("click", onSharePick);
+  MOBILE_MQ.addEventListener("change", onViewportChange);
+  window.visualViewport?.addEventListener("resize", onPlayResize);
 }
 
 function hideAllScreens() {
@@ -98,6 +117,8 @@ function hideAllScreens() {
     screen.hidden = true;
     screen.classList.add("hidden");
   });
+  stopPlayTimer();
+  closeCluesPanel();
   hideWin();
 }
 
@@ -266,10 +287,31 @@ function startLevel(levelKey, stageIndex = 0) {
   state.won = false;
   document.body.dataset.theme = state.theme.key;
   showScreen("game");
+  startPlayTimer();
+  closeCluesPanel();
   renderGame();
 }
 
-function cellSizeFor(levelKey, cols) {
+function isMobilePlay() {
+  return MOBILE_MQ.matches;
+}
+
+function cellSizeFor(levelKey, cols, rows = 8) {
+  if (isMobilePlay()) {
+    const gap = 2;
+    const card = els.board?.closest(".board-card");
+    const clue = document.querySelector(".play-clue");
+    const viewportH = window.visualViewport?.height ?? window.innerHeight;
+    const viewportW = window.visualViewport?.width ?? window.innerWidth;
+    const cardW = card?.clientWidth || viewportW - 32;
+    const cardH = card?.clientHeight || viewportH - 260;
+    const clueH = clue?.offsetHeight || 52;
+    const availW = Math.max(160, cardW - 4);
+    const availH = Math.max(160, cardH - clueH - 10);
+    const byW = Math.floor((availW - (cols - 1) * gap) / Math.max(1, cols));
+    const byH = Math.floor((availH - (rows - 1) * gap) / Math.max(1, rows));
+    return Math.max(16, Math.min(44, byW, byH));
+  }
   const prefer = { beginner: 56, intermediate: 46, advanced: 38 }[levelKey] ?? 46;
   const max = { beginner: 64, intermediate: 52, advanced: 42 }[levelKey] ?? 52;
   const gap = levelKey === "beginner" ? 4 : 3;
@@ -286,9 +328,9 @@ function renderGame() {
   els.topicVibe.textContent = `${theme.name} · ${level.name} · ${puzzle.words.length} clues on one page`;
   els.progress.textContent = `${level.name} · ${solved} / ${puzzle.words.length} clues`;
   els.boardTopic.textContent = topic.name;
-  els.backBtn.textContent = "← Levels";
+  els.backBtn.textContent = isMobilePlay() ? "←" : "← Levels";
 
-  const cell = cellSizeFor(level.key, puzzle.cols);
+  const cell = cellSizeFor(level.key, puzzle.cols, puzzle.rows);
   els.board.style.setProperty("--cell", `${cell}px`);
   els.board.style.setProperty("--cols", String(puzzle.cols));
   els.board.dataset.level = level.key;
@@ -339,6 +381,11 @@ function renderGame() {
 
   renderClues();
   renderBank();
+  renderActiveClue();
+
+  if (isMobilePlay()) {
+    requestAnimationFrame(() => fitMobileBoard(level.key, puzzle.cols, puzzle.rows));
+  }
 
   if (isComplete(session)) {
     els.status.textContent = "Every syllable is in the right place.";
@@ -349,6 +396,58 @@ function renderGame() {
     const clue = selected?.clue ?? "Choose a clue, then tap Hangul tiles.";
     els.status.textContent = clue;
   }
+}
+
+function fitMobileBoard(levelKey, cols, rows) {
+  if (!isMobilePlay() || !state.session || screens.game.hidden) return;
+  const next = cellSizeFor(levelKey, cols, rows);
+  const current = Number.parseFloat(getComputedStyle(els.board).getPropertyValue("--cell"));
+  if (Number.isFinite(next) && Math.abs(next - current) >= 1) {
+    els.board.style.setProperty("--cell", `${next}px`);
+  }
+}
+
+function renderActiveClue() {
+  const { session } = state;
+  const selected = getSelectedWord(session);
+  const card = els.activeClue;
+  card.classList.remove("correct", "prompt", "message");
+
+  if (!session) {
+    card.replaceChildren();
+    return;
+  }
+
+  if (isComplete(session)) {
+    card.classList.add("message", "correct");
+    card.innerHTML = `<span class="active-clue-text">Every syllable is in the right place.</span>`;
+    return;
+  }
+
+  if (isFilled(session)) {
+    card.classList.add("message");
+    card.innerHTML = `<span class="active-clue-text">A few cells are still wrong. Tap a cell to take a letter back.</span>`;
+    return;
+  }
+
+  if (!selected) {
+    card.classList.add("prompt");
+    card.innerHTML = `<span class="active-clue-text">Tap a cell to see its clue, then tap Hangul tiles.</span>`;
+    return;
+  }
+
+  const number = session.numbers[selected.row][selected.col];
+  const dir = selected.direction === "down" ? "Down" : "Across";
+  const status = wordStatus(session, selected);
+  if (status === "correct") card.classList.add("correct");
+  const topic = selected.sourceTopic
+    ? `<span class="topic-tag">${selected.sourceTopic}</span>`
+    : "";
+  card.innerHTML = `
+    <span class="active-clue-meta"><b>${number}</b> ${dir}</span>
+    ${topic}
+    <span class="active-clue-text">${selected.clue}</span>
+  `;
 }
 
 function renderClues() {
@@ -382,9 +481,66 @@ function renderClues() {
     btn.addEventListener("click", () => {
       if (state.won) return;
       state.session = selectWord(state.session, btn.dataset.id);
+      closeCluesPanel();
       renderGame();
     });
   });
+}
+
+function shuffleLetters() {
+  if (state.won || !state.session) return;
+  state.session = shuffleBank(state.session);
+  renderGame();
+}
+
+function toggleCluesPanel() {
+  const open = !els.sideCard.classList.contains("is-open");
+  els.sideCard.classList.toggle("is-open", open);
+  els.cluesToggle.setAttribute("aria-expanded", String(open));
+}
+
+function closeCluesPanel() {
+  els.sideCard.classList.remove("is-open");
+  els.cluesToggle.setAttribute("aria-expanded", "false");
+}
+
+function startPlayTimer() {
+  stopPlayTimer();
+  tickPlayTimer();
+  playTimerId = window.setInterval(tickPlayTimer, 250);
+}
+
+function stopPlayTimer() {
+  window.clearInterval(playTimerId);
+  playTimerId = 0;
+}
+
+function tickPlayTimer() {
+  if (!els.timer) return;
+  if (state.won) {
+    els.timer.textContent = formatTime(state.elapsedMs);
+    return;
+  }
+  if (!state.startedAt || screens.game.hidden) {
+    els.timer.textContent = "0:00";
+    return;
+  }
+  els.timer.textContent = formatTime(Date.now() - state.startedAt);
+}
+
+function onViewportChange() {
+  closeCluesPanel();
+  if (!screens.game.hidden && state.session) renderGame();
+}
+
+function onPlayResize() {
+  if (fireworks.running) sizeFireworks();
+  window.clearTimeout(resizeTimerId);
+  resizeTimerId = window.setTimeout(() => {
+    if (!screens.game.hidden && state.session && isMobilePlay()) {
+      fitMobileBoard(state.level.key, state.session.puzzle.cols, state.session.puzzle.rows);
+    }
+  }, 120);
 }
 
 function renderBank() {
@@ -407,6 +563,7 @@ function renderBank() {
 
 function onCellClick(r, c) {
   if (state.won) return;
+  closeCluesPanel();
   if (state.session.fills[r][c]) {
     state.session = recallCell(state.session, r, c);
   }
@@ -723,6 +880,4 @@ function burst(x, y, color) {
   }
 }
 
-window.addEventListener("resize", () => {
-  if (fireworks.running) sizeFireworks();
-});
+window.addEventListener("resize", onPlayResize);
