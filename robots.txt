@@ -6,4 +6,4 @@ Disallow: /js/admin-store.js
 Disallow: /css/admin.css
 Disallow: /tools/
 
-Sitemap: https://kculture-puzzle.com/sitemap.xml
+Sitemap: https://www.kculture-puzzle.com/sitemap.xml
