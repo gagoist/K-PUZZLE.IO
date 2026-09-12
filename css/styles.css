@@ -180,6 +180,10 @@ body:has(#game:not([hidden])) .site-footer {
   margin: 0;
 }
 
+.lede a {
+  color: var(--accent-2);
+}
+
 .pill {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.04);
@@ -921,8 +925,54 @@ body:has(.site-modal:not([hidden]):not(.hidden)) {
 }
 
 .contact-form {
+  position: relative;
   display: grid;
   gap: 12px;
+}
+
+.info-contact-form {
+  margin: 8px 0 24px;
+  max-width: 420px;
+}
+
+.info-updated {
+  margin: -8px 0 16px !important;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.topic-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px 12px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-catalog li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.topic-catalog strong {
+  color: var(--ink);
+}
+
+.topic-catalog span {
+  color: var(--muted);
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .contact-field {

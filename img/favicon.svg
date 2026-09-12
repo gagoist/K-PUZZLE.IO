@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="K-PUZZLE">
+  <rect width="32" height="32" rx="8" fill="#14111c"/>
+  <g fill="none" stroke="#c084fc" stroke-width="1.2">
+    <rect x="6" y="6" width="8" height="8" rx="1.2"/>
+    <rect x="14" y="6" width="8" height="8" rx="1.2"/>
+    <rect x="14" y="14" width="8" height="8" rx="1.2"/>
+    <rect x="6" y="14" width="8" height="8" rx="1.2"/>
+  </g>
+  <text x="10" y="13.6" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="7" font-weight="800" fill="#f6f1ff">K</text>
+  <text x="18" y="21.6" text-anchor="middle" font-family="Outfit, Arial, sans-serif" font-size="7" font-weight="800" fill="#67e8f9">|</text>
+</svg>

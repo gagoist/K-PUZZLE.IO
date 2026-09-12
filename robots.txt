@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /js/admin.js
+Disallow: /js/admin-store.js
+Disallow: /css/admin.css
+Disallow: /tools/
+
+Sitemap: https://kculture-puzzle.com/sitemap.xml
