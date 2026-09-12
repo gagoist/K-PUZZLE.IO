@@ -1,5 +1,5 @@
 /**
- * K-PUZZLE.IO content pack
+ * K-PUZZLE.COM content pack
  *
  * Two themes only: K-POP and K-DRAMA & MOVIES.
  * Every topic keeps a fan-question bank. pack.js draws

@@ -677,7 +677,7 @@ function sharePayload() {
   const time = formatTime(state.elapsedMs);
   const rank = els.winRank.textContent;
   const url = location.href.split("#")[0];
-  const text = `I cleared ${topic} · ${level} on K-PUZZLE.IO in ${time} — ${rank}! Can you beat my Hangul crossword?`;
+  const text = `I cleared ${topic} · ${level} on K-PUZZLE.COM in ${time} — ${rank}! Can you beat my Hangul crossword?`;
   return { text, url, full: `${text} ${url}` };
 }
 
@@ -723,7 +723,7 @@ function openShareWindow(url) {
 async function shareInstagram(payload) {
   if (navigator.share) {
     try {
-      await navigator.share({ title: "K-PUZZLE.IO", text: payload.text, url: payload.url });
+      await navigator.share({ title: "K-PUZZLE.COM", text: payload.text, url: payload.url });
       return;
     } catch (error) {
       if (error?.name === "AbortError") return;

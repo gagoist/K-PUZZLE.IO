@@ -154,7 +154,7 @@ function bindLegalUi() {
           email,
           message,
           _replyto: email,
-          _subject: "K-PUZZLE.IO contact",
+          _subject: "K-PUZZLE.COM contact",
           _template: "table",
           _captcha: false,
         }),
