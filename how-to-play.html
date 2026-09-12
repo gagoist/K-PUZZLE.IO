@@ -3,102 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>K-PUZZLE.IO — Hangul Crossword</title>
-  <meta name="description" content="Hangul crossword puzzles for K-POP and K-Drama fans. Clear a topic, then share your time.">
-  <meta property="og:title" content="K-PUZZLE.IO — Hangul Crossword">
-  <meta property="og:description" content="I just cleared a Hangul crossword on K-PUZZLE.IO. Can you beat my time?">
+  <title>How to Play — K-PUZZLE.IO</title>
+  <meta name="description" content="How to play K-PUZZLE.IO: pick a K-POP or K-Drama topic, choose a difficulty, then place Hangul syllables from the letter bank onto the crossword.">
+  <meta property="og:title" content="How to Play — K-PUZZLE.IO">
+  <meta property="og:description" content="Learn the Hangul crossword rules: themes, difficulties, letter bank, and sharing.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=20260912f">
 </head>
-<body>
-  <div id="app">
-    <section id="lobby">
-      <header class="topbar">
-        <div class="brand">
-          <strong>K-PUZZLE.IO</strong>
-          <h1>Hangul crossword for global K-culture fans</h1>
-        </div>
-        <div class="lede">
-          <p>Pick K-POP or K-Drama &amp; Movies, then one of 100 topics — like TWICE or Squid Game. Every topic has a bank of fan questions.</p>
-          <p>Beginner, Intermediate, and Advanced draw 5, 10, or 20 clues onto one crossword. Play again for a new draw, or pick Random Mix.</p>
-        </div>
-      </header>
-      <div id="theme-grid" class="theme-grid"></div>
-    </section>
+<body class="info-page">
+  <div id="app" class="info-app">
+    <header class="info-top">
+      <a class="info-brand" href="index.html">K-PUZZLE.IO</a>
+      <nav class="info-nav" aria-label="Information">
+        <a href="about.html">About</a>
+        <a href="how-to-play.html" aria-current="page">How to Play</a>
+        <a href="faq.html">FAQ</a>
+        <a class="info-play" href="index.html">Play</a>
+      </nav>
+    </header>
 
-    <section id="topics" class="hidden" hidden>
-      <header class="game-top">
-        <div>
-          <button id="topics-back" class="ghost" type="button">← Themes</button>
-          <h1 id="topics-title"></h1>
-          <p id="topics-vibe" class="vibe"></p>
-          <div class="topic-tools">
-            <input id="topic-search" type="search" placeholder="Search a topic…" autocomplete="off">
-            <p id="topic-count"></p>
-          </div>
-        </div>
-      </header>
-      <div id="topic-grid" class="topic-grid"></div>
-    </section>
+    <article class="info-article">
+      <p class="info-kicker">Site information</p>
+      <h1>How to Play</h1>
+      <p>K-PUZZLE.IO is a Hangul crossword. English clues describe a song, member, character, or plot point. You fill the grid with Korean syllables from a letter bank. Nothing is typed on a keyboard unless you want to search for a topic first.</p>
 
-    <section id="levels" class="hidden" hidden>
-      <header class="game-top">
-        <div>
-          <button id="levels-back" class="ghost" type="button">← Topics</button>
-          <h1 id="levels-title"></h1>
-          <p id="levels-hangul" class="topic-hangul"></p>
-          <p id="levels-vibe" class="vibe"></p>
-        </div>
-      </header>
-      <div id="level-grid" class="topic-grid"></div>
-    </section>
+      <h2>Start a puzzle</h2>
+      <ol class="info-steps">
+        <li>
+          <h3>Choose a theme</h3>
+          <p>The lobby has two doors: <strong>K-POP</strong> and <strong>K-Drama &amp; Movies</strong>. That choice only picks the topic list. You can return to the lobby at any time.</p>
+        </li>
+        <li>
+          <h3>Pick a topic — or Random Mix</h3>
+          <p>Each theme has 100 named topics plus <strong>Random Mix</strong>. Search the list if you already know the group or title you want. Random Mix shuffles clues from the whole theme onto one board.</p>
+        </li>
+        <li>
+          <h3>Set a difficulty</h3>
+          <p><strong>Beginner</strong> draws 5 clues, <strong>Intermediate</strong> draws 10, and <strong>Advanced</strong> draws 20. Harder levels allow longer Hangul and more crossings. Starting the level starts the timer.</p>
+        </li>
+        <li>
+          <h3>Read a clue, then place tiles</h3>
+          <p>Tap a numbered cell or a clue to select an Across or Down entry. The active clue appears under the board. Tap Hangul tiles in the letter bank to drop them onto the highlighted word. The next empty cell fills automatically.</p>
+        </li>
+        <li>
+          <h3>Fix mistakes</h3>
+          <p>A wrong syllable stays on the board until you take it back. Tap a filled cell to return that tile to the bank. If every cell is full but the puzzle is not cleared, a few letters are still in the wrong place — lift them and try again.</p>
+        </li>
+        <li>
+          <h3>Clear, then share if you want</h3>
+          <p>When every syllable matches the solution, the timer stops and you see your time and an estimated rank for that device. Retry draws another layout from the same topic. Share copies a challenge to Instagram, X, or Facebook if you want to compare times.</p>
+        </li>
+      </ol>
 
-    <section id="game" class="hidden" hidden>
-      <header class="game-top">
-        <div class="game-top-main">
-          <button id="back-btn" class="ghost" type="button">← Topics</button>
-          <h1 id="topic-title"></h1>
-          <p id="topic-hangul" class="topic-hangul"></p>
-          <p id="topic-vibe" class="vibe"></p>
-        </div>
-        <time id="game-timer" class="game-timer" aria-label="Elapsed time">0:00</time>
-        <p id="progress" class="progress pill"></p>
-        <button id="hud-shuffle" class="shuffle hud-shuffle" type="button">Shuffle</button>
-      </header>
+      <h2>The letter bank</h2>
+      <p>The bank holds exactly the Hangul syllables needed for the current crossword, already shuffled. You are not inventing extra letters. <strong>Shuffle</strong> only rearranges unused tiles. It does not change the puzzle or reset the clock.</p>
+      <p>On a phone, the clue list can hide behind a <strong>Clues</strong> button so the board stays large. Open it to jump to a numbered entry, then close it and keep placing tiles.</p>
 
-      <div class="game-shell">
-        <section class="bank-card">
-          <div class="bank-head">
-            <h2>Letter bank</h2>
-            <button id="shuffle-btn" class="shuffle" type="button">Shuffle</button>
-          </div>
-          <div id="bank" class="bank"></div>
-        </section>
-
-        <section class="board-card">
-          <p id="board-topic" class="board-topic"></p>
-          <div id="board" class="crossword"></div>
-          <div class="play-clue">
-            <div id="active-clue" class="active-clue" role="status" aria-live="polite"></div>
-            <button id="clues-toggle" class="clues-toggle" type="button" aria-expanded="false" aria-controls="clues">
-              Clues
-            </button>
-          </div>
-          <p id="status" class="status"></p>
-        </section>
-
-        <aside class="side-card" id="side-card">
-          <div class="clues-head">
-            <h2>Clues</h2>
-            <button id="clues-close" class="ghost clues-close" type="button">Close</button>
-          </div>
-          <div id="clues" class="clue-list"></div>
-        </aside>
-      </div>
-    </section>
+      <h2>Useful details</h2>
+      <ul>
+        <li>Answers are Hangul even when the clue is about an English title. Think of how the name is written in Korean.</li>
+        <li>Crossing cells belong to two words. Placing a syllable there counts for both.</li>
+        <li>Play again on the same topic for a new draw from that topic’s question bank.</li>
+        <li>Clear times are stored in this browser only. Another phone or a cleared cache will not keep your history.</li>
+      </ul>
+      <p>For who runs the site and how we treat artist names, see <a href="about.html">About</a>. Quick answers live on the <a href="faq.html">FAQ</a>. When you are ready, <a href="index.html">return to the puzzles</a>.</p>
+    </article>
   </div>
 
   <footer class="site-footer" id="site-footer">
@@ -107,7 +79,7 @@
     <nav class="site-footer-links" aria-label="About this site">
       <a href="about.html">About</a>
       <span class="site-footer-sep" aria-hidden="true">|</span>
-      <a href="how-to-play.html">How to Play</a>
+      <a href="how-to-play.html" aria-current="page">How to Play</a>
       <span class="site-footer-sep" aria-hidden="true">|</span>
       <a href="faq.html">FAQ</a>
     </nav>
@@ -129,7 +101,6 @@
       <div class="site-modal-body">
         <p class="site-modal-updated">Last updated: September 11, 2026</p>
         <p>K-PUZZLE.IO (“we”, “our”, or “the site”) is a fan-made Hangul crossword platform. This policy explains what information we collect, how cookies and advertising may be used, and the choices you have. Using the site means you agree to this policy.</p>
-
         <h3>Information we collect</h3>
         <p>We do not require an account. We may collect:</p>
         <ul>
@@ -137,18 +108,15 @@
           <li><strong>Messages you send us.</strong> If you use Contact Us, we receive the email address you provide (so we can reply) and the contents of your message.</li>
           <li><strong>Technical data.</strong> Standard server or advertising logs may include IP address, browser type, device type, referring URL, and pages viewed.</li>
         </ul>
-
         <h3>Cookies and similar technologies</h3>
         <p>Cookies are small text files stored on your device. We and our partners may use cookies, pixels, and local storage to run the site, remember preferences, measure traffic, and show ads.</p>
         <p>You can control cookies in your browser settings. Blocking some cookies may limit features such as saved progress or personalized ads.</p>
-
         <h3>Google AdSense and advertising cookies</h3>
         <p>This site uses Google AdSense to display advertisements. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites.</p>
         <p>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the Internet.</p>
         <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. You can also opt out of some third-party vendors’ use of cookies for personalized advertising at <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info/choices</a>.</p>
         <p>How Google uses data from sites or apps that use its services is described here: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google Advertising Policies</a>.</p>
         <p>These vendors may collect data such as your IP address, cookie identifiers, and browsing activity on this and other sites to show relevant ads, limit how often you see an ad, and measure ad performance.</p>
-
         <h3>How we use information</h3>
         <ul>
           <li>To operate, maintain, and improve K-PUZZLE.IO</li>
@@ -157,16 +125,12 @@
           <li>To show ads and understand how the site is used</li>
         </ul>
         <p>We do not sell your personal information.</p>
-
         <h3>Third-party services</h3>
         <p>Google and other advertising or infrastructure partners process data under their own policies. We do not control those third-party cookies or how those companies use the data they collect.</p>
-
         <h3>Children</h3>
         <p>K-PUZZLE.IO is intended for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
-
         <h3>Changes</h3>
         <p>We may update this policy from time to time. The “Last updated” date at the top will change when we do. Continued use of the site after an update means you accept the revised policy.</p>
-
         <h3>Contact</h3>
         <p>Questions about this policy or your data can be sent with the Contact Us link in the site footer. Please include a reply email so we can respond.</p>
       </div>
@@ -195,51 +159,6 @@
     </div>
   </div>
 
-  <div id="win" class="win hidden" hidden role="dialog" aria-modal="true" aria-labelledby="win-title">
-    <canvas id="fireworks" class="fireworks" aria-hidden="true"></canvas>
-    <div class="win-card">
-      <p class="win-kicker">Puzzle cleared</p>
-      <h2 id="win-title">Congratulations</h2>
-      <p id="win-copy"></p>
-      <div class="win-stats">
-        <div class="win-stat">
-          <span>Time</span>
-          <strong id="win-time">0:00</strong>
-        </div>
-        <div class="win-stat">
-          <span>Rank</span>
-          <strong id="win-rank">Top —%</strong>
-        </div>
-      </div>
-      <div class="win-actions">
-        <button id="retry-btn" class="primary" type="button">RETRY</button>
-        <button id="share-btn" class="share" type="button" aria-expanded="false" aria-controls="share-menu">Share</button>
-      </div>
-      <div id="share-menu" class="share-menu hidden" hidden>
-        <button type="button" data-share="instagram" aria-label="Share to Instagram">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.6A4.4 4.4 0 1 0 16.4 12 4.4 4.4 0 0 0 12 7.6zm0 7.2A2.8 2.8 0 1 1 14.8 12 2.8 2.8 0 0 1 12 14.8zM17.35 6.4a1.05 1.05 0 1 0 1.05 1.05 1.05 1.05 0 0 0-1.05-1.05z"/></svg>
-          Instagram
-        </button>
-        <button type="button" data-share="x" aria-label="Share to X">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.7 10.4 21.2 3h-1.5l-5.6 6.4L9.6 3H3.8l6.9 10.1L3.8 21h1.5l6-6.9 4.8 6.9h5.8zm-2.1 2.5-.7-1-5.9-8.3h2.5l4.8 6.8.7 1 6.2 8.8h-2.5z"/></svg>
-          X
-        </button>
-        <button type="button" data-share="facebook" aria-label="Share to Facebook">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.5 8.5V6.8c0-.7.5-1 1.2-1h1.8V3h-2.5C11.8 3 10 4.8 10 7.2v1.3H8v3h2V21h3.5v-9.5h2.4l.6-3z"/></svg>
-          Facebook
-        </button>
-      </div>
-      <p id="win-toast" class="win-toast hidden" hidden></p>
-    </div>
-  </div>
-
   <script src="js/legal.js?v=20260912f"></script>
-  <script src="js/topics-kpop.js?v=20260912e"></script>
-  <script src="js/topics-kdrama.js?v=20260912e"></script>
-  <script src="js/admin-store.js?v=20260912b"></script>
-  <script src="js/data.js?v=20260912e"></script>
-  <script src="js/engine.js?v=20260912a"></script>
-  <script src="js/pack.js?v=20260912d"></script>
-  <script src="js/app.js?v=20260912e"></script>
 </body>
 </html>
