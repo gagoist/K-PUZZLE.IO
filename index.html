@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260911e">
 </head>
 <body>
   <div id="app">
@@ -21,7 +21,10 @@
           <strong>K-PUZZLE.IO</strong>
           <h1>Hangul crossword for global K-culture fans</h1>
         </div>
-        <p class="lede">Pick K-POP or K-Drama &amp; Movies, then one of 50 topics — like TWICE or Squid Game. Every topic has a 100-question bank. Beginner, Intermediate, and Advanced draw 5, 10, or 20 clues onto one crossword. Play again for a new draw, or pick Random Mix.</p>
+        <div class="lede">
+          <p>Pick K-POP or K-Drama &amp; Movies, then one of 100 topics — like TWICE or Squid Game. Every topic has a bank of fan questions.</p>
+          <p>Beginner, Intermediate, and Advanced draw 5, 10, or 20 clues onto one crossword. Play again for a new draw, or pick Random Mix.</p>
+        </div>
       </header>
       <div id="theme-grid" class="theme-grid"></div>
     </section>
@@ -98,15 +101,15 @@
     </section>
   </div>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="site-footer">
     <p class="site-footer-copy">© 2026 K-PUZZLE.IO. All rights reserved.</p>
     <p class="site-footer-disclaimer">This is an unofficial, fan-made interactive puzzle platform for global K-culture fans. All artist names, drama titles, and related trademarks belong to their respective entertainment agencies.</p>
     <nav class="site-footer-links" aria-label="Legal">
       <span>Disclaimer</span>
       <span class="site-footer-sep" aria-hidden="true">|</span>
-      <button type="button" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-modal">Privacy Policy</button>
+      <a href="#privacy-modal" id="open-privacy" aria-haspopup="dialog" aria-controls="privacy-modal">Privacy Policy</a>
       <span class="site-footer-sep" aria-hidden="true">|</span>
-      <button type="button" id="open-contact" aria-haspopup="dialog" aria-controls="contact-modal">Contact Us</button>
+      <a href="#contact-modal" id="open-contact" aria-haspopup="dialog" aria-controls="contact-modal">Contact Us</a>
     </nav>
   </footer>
 
@@ -114,7 +117,7 @@
     <div class="site-modal-card site-modal-card--wide">
       <header class="site-modal-head">
         <h2 id="privacy-title">Privacy Policy</h2>
-        <button type="button" class="site-modal-close" data-close-modal aria-label="Close">Close</button>
+        <a href="#site-footer" class="site-modal-close" data-close-modal aria-label="Close">Close</a>
       </header>
       <div class="site-modal-body">
         <p class="site-modal-updated">Last updated: September 11, 2026</p>
@@ -167,7 +170,7 @@
     <div class="site-modal-card">
       <header class="site-modal-head">
         <h2 id="contact-title">Contact Us</h2>
-        <button type="button" class="site-modal-close" data-close-modal aria-label="Close">Close</button>
+        <a href="#site-footer" class="site-modal-close" data-close-modal aria-label="Close">Close</a>
       </header>
       <form id="contact-form" class="contact-form" novalidate>
         <label class="contact-field">
@@ -223,11 +226,12 @@
     </div>
   </div>
 
-  <script src="js/topics-kpop.js"></script>
-  <script src="js/topics-kdrama.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/engine.js"></script>
-  <script src="js/pack.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/topics-kpop.js?v=20260912e"></script>
+  <script src="js/topics-kdrama.js?v=20260912e"></script>
+  <script src="js/admin-store.js?v=20260912b"></script>
+  <script src="js/data.js?v=20260912e"></script>
+  <script src="js/engine.js?v=20260912a"></script>
+  <script src="js/pack.js?v=20260912d"></script>
+  <script src="js/app.js?v=20260912e"></script>
 </body>
 </html>

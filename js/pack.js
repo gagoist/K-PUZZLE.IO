@@ -1,7 +1,7 @@
 /**
- * Builds shuffled crosswords from a 100-clue topic bank.
+ * Builds shuffled crosswords from each topic’s fan-question bank.
  *
- * Each topic keeps a full question pool. A play draws from that pool:
+ * A play draws from that pool:
  * Beginner 5 clues, Intermediate 10 clues, Advanced 20 clues.
  */
 const LEVELS = [
@@ -9,19 +9,19 @@ const LEVELS = [
     key: "beginner",
     name: "Beginner",
     count: 5,
-    blurb: "Five clues drawn from the 100-question bank. Short Hangul, gentler clues.",
+    blurb: "Five clues from this topic’s fan-question bank. Short Hangul, gentler clues.",
   },
   {
     key: "intermediate",
     name: "Intermediate",
     count: 10,
-    blurb: "Ten clues drawn from the 100-question bank. More overlapping syllables.",
+    blurb: "Ten clues from this topic’s fan-question bank. More overlapping syllables.",
   },
   {
     key: "advanced",
     name: "Advanced",
     count: 20,
-    blurb: "Twenty clues drawn from the 100-question bank. Denser grid and longer words.",
+    blurb: "Twenty clues from this topic’s fan-question bank. Denser grid and longer words.",
   },
 ];
 

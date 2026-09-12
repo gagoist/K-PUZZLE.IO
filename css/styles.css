@@ -75,12 +75,16 @@ button {
   flex: 1 0 auto;
   width: min(1240px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 40px;
+  padding: 28px 0 168px;
 }
 
 #app:has(#game:not([hidden])) {
   width: min(1760px, calc(100vw - 28px));
   padding: 16px 0 32px;
+}
+
+body:has(#game:not([hidden])) .site-footer {
+  display: none;
 }
 
 .topbar,
@@ -89,6 +93,11 @@ button {
   justify-content: space-between;
   gap: 16px;
   align-items: flex-start;
+}
+
+#lobby .topbar {
+  flex-direction: column;
+  gap: 14px;
 }
 
 .game-timer,
@@ -130,6 +139,15 @@ button {
   letter-spacing: -0.04em;
 }
 
+#lobby .brand {
+  width: 100%;
+}
+
+#lobby .brand h1 {
+  font-size: clamp(26px, 3.6vw, 44px);
+  white-space: nowrap;
+}
+
 #game .game-top h1 {
   font-size: clamp(22px, 2.6vw, 32px);
 }
@@ -148,9 +166,18 @@ button {
 }
 
 .lede {
-  max-width: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px 18px;
+  width: 100%;
+  max-width: none;
   margin: 0;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.lede p {
+  margin: 0;
 }
 
 .pill {
@@ -705,24 +732,36 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
 }
 
 .site-footer {
-  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   gap: 6px;
   width: 100%;
-  margin-top: auto;
-  padding: 18px 20px calc(22px + env(safe-area-inset-bottom, 0px));
+  margin: 0;
+  padding: 28px 24px calc(18px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 6, 11, 0.88) 28%, rgba(7, 6, 11, 0.96) 100%);
   text-align: center;
+  pointer-events: none;
+}
+
+.site-footer > * {
+  pointer-events: auto;
 }
 
 .site-footer p {
-  margin: 0;
+  margin: 0 auto;
   max-width: 52rem;
   font-size: 12px;
   line-height: 1.6;
   color: #888;
+  text-align: center;
 }
 
 .site-footer-copy {
@@ -735,12 +774,13 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
   align-items: center;
   justify-content: center;
   gap: 0;
-  margin: 4px 0 0;
+  margin: 4px auto 0;
   font-size: 12px;
   line-height: 1.6;
   color: #888;
 }
 
+.site-footer-links a,
 .site-footer-links button {
   margin: 0;
   border: 0;
@@ -749,8 +789,12 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
   color: #888;
   font: inherit;
   letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
+.site-footer-links a:hover,
+.site-footer-links a:focus-visible,
 .site-footer-links button:hover,
 .site-footer-links button:focus-visible {
   color: #bbb;
@@ -763,15 +807,25 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
   color: #666;
 }
 
+body:has(.site-modal:target),
+body:has(.site-modal:not([hidden]):not(.hidden)) {
+  overflow: hidden;
+}
+
 .site-modal {
   position: fixed;
   inset: 0;
   z-index: 50;
-  display: grid;
+  display: none;
   place-items: center;
   padding: 20px;
   background: rgba(5, 4, 10, 0.78);
   backdrop-filter: blur(12px);
+}
+
+.site-modal:target,
+.site-modal:not([hidden]):not(.hidden) {
+  display: grid !important;
 }
 
 .site-modal-card {
@@ -809,6 +863,9 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
 
 .site-modal-close {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.06);
   color: var(--muted);
@@ -816,6 +873,8 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .site-modal-close:hover,
@@ -1163,6 +1222,15 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
     flex-direction: column;
   }
 
+  #lobby .brand h1 {
+    white-space: normal;
+  }
+
+  .lede {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .theme-card {
     min-height: 360px;
   }
@@ -1180,6 +1248,10 @@ body[data-theme="k-drama"] #topic-grid .topic-card:focus-visible .topic-art {
 }
 
 @media (max-width: 768px) {
+  #app {
+    padding-bottom: 196px;
+  }
+
   html:has(#game:not([hidden])),
   body:has(#game:not([hidden])) {
     height: 100dvh;

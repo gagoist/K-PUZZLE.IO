@@ -11,7 +11,14 @@ const kpop = [
   "two-ne1","mamamoo","got7","treasure","zb1","riize","babymonster","illit",
   "nmixx","stayc","the-boyz","monsta-x","winner","ikon","two-pm","tvxq",
   "boa","taeyeon","g-dragon","hyuna","oh-my-girl","apink","fx","wonder-girls",
-  "kiss-of-life","boynextdoor","random-k-pop",
+  "kiss-of-life","boynextdoor",
+  "wayv","nct-wish","superm","gfriend","izone","wanna-one","btob","highlight",
+  "cnblue","infinite","vixx","pentagon","astro","sf9","cravity","p1harmony",
+  "tws","plave","fifty-fifty","triples","kep1er","dreamcatcher","everglow",
+  "fromis-9","wjsn","loona","kara","sistar","miss-a","t-ara","after-school",
+  "sunmi","chungha","taemin","jennie","rose","jungkook","jimin","rain",
+  "akmu","bibi","heize","epik-high","jay-park","viviz","hearts2hearts",
+  "izna","meovv","billlie","h1key","random-k-pop",
 ];
 const kdrama = [
   "squid-game","winter-sonata","parasite","cloy","goblin","dots","itaewon-class",
@@ -22,7 +29,17 @@ const kdrama = [
   "weak-hero","train-to-busan","oldboy","handmaiden","memories-murder","the-host",
   "along-gods","miracle-cell","my-sassy-girl","decision-leave","man-from-nowhere",
   "veteran","extreme-job","jsa","silenced","burning","ode-father","200-pounds",
-  "peninsula","new-world","random-k-drama",
+  "peninsula","new-world",
+  "our-beloved-summer","true-beauty","start-up","penthouse","my-name","stranger",
+  "my-mister","mr-queen","flower-of-evil","beyond-evil","hellbound","sweet-home",
+  "uncanny-counter","happiness","my-demon","tale-nine-tailed","healer","coffee-prince",
+  "secret-garden","the-heirs","dream-high","reply-1994","camellia-blooms",
+  "world-of-married","liberation-notes","twinkling-watermelon","tangerines",
+  "when-phone-rings","love-next-door","hierarchy","mask-girl","reborn-rich",
+  "little-women","our-blues","doom-service","romance-bonus","something-rain",
+  "snowdrop","judge-from-hell","the-wailing","taxi-driver","roaring-currents",
+  "snowpiercer","okja","i-saw-the-devil","lady-vengeance","the-chaser","exhuma",
+  "the-roundup","space-sweepers","random-k-drama",
 ];
 
 fs.mkdirSync(dstDir, { recursive: true });

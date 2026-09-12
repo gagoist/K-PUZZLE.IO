@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-PUZZLE.IO 관리자 — 질문 편집</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=20260912b">
+  <link rel="stylesheet" href="css/admin.css?v=20260912b">
+</head>
+<body class="admin-body">
+  <div id="admin">
+    <header class="admin-top">
+      <div class="brand">
+        <strong>K-PUZZLE.IO ADMIN</strong>
+        <h1>주제별 질문 편집</h1>
+        <p>한글과 영어 질문을 나란히 보고, 한글로 적으면 영문으로 번역한 뒤 다듬을 수 있습니다. 수정은 이 브라우저에 자동 저장되고, 게임에 바로 반영됩니다.</p>
+      </div>
+      <div class="admin-actions">
+        <p id="save-state" class="save-state" role="status">준비됨</p>
+        <a class="ghost" href="index.html">게임으로</a>
+        <button id="export-json" class="ghost" type="button">패치 JSON</button>
+        <button id="import-json" class="ghost" type="button">패치 가져오기</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+        <button id="export-js" class="ghost" type="button">이 테마 JS</button>
+        <button id="export-all-js" class="primary" type="button">전체 JS 내려받기</button>
+      </div>
+    </header>
+
+    <aside class="admin-nav">
+      <div id="theme-tabs" class="theme-tabs"></div>
+      <input id="topic-search" type="search" placeholder="주제 검색…" autocomplete="off">
+      <div id="topic-list" class="topic-list"></div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="editor-head">
+        <div>
+          <h2 id="topic-title">주제를 선택하세요</h2>
+          <p id="topic-meta" class="vibe"></p>
+        </div>
+        <span id="dirty-badge" class="dirty-badge">원본</span>
+      </header>
+
+      <div class="editor-tools">
+        <input id="question-search" type="search" placeholder="질문·정답·ID 검색…" autocomplete="off">
+        <label class="check"><input id="filter-dirty" type="checkbox"> 수정만</label>
+        <label class="check"><input id="filter-empty-ko" type="checkbox"> 한글 없는 문항</label>
+        <label class="check"><input id="auto-translate" type="checkbox" checked> 한글 입력 시 자동 영문 번역</label>
+        <button id="translate-empty-en" class="ghost" type="button">빈 영문 채우기</button>
+        <button id="translate-empty-ko" class="ghost" type="button">빈 한글 채우기</button>
+        <button id="reset-topic" class="ghost" type="button">이 주제 되돌리기</button>
+        <button id="reset-all" class="ghost danger" type="button">전체 되돌리기</button>
+      </div>
+      <p id="batch-status" class="batch-status" role="status"></p>
+
+      <p id="empty-state" class="empty-state">왼쪽에서 주제를 고르면 팬 질문들이 한글/영어와 함께 나타납니다.</p>
+      <div id="question-list" class="question-list"></div>
+
+      <section class="add-card">
+        <h3>질문 추가</h3>
+        <div class="add-grid">
+          <label>ID <input id="add-id" type="text" placeholder="비우면 자동 생성"></label>
+          <label>한글 질문
+            <textarea id="add-ko" rows="2" placeholder="한글로 질문을 적으세요"></textarea>
+            <button id="add-translate-en" class="translate-btn" type="button">영문으로 번역 →</button>
+          </label>
+          <label>English clue
+            <textarea id="add-en" rows="2" placeholder="English clue"></textarea>
+            <button id="add-translate-ko" class="translate-btn" type="button">← 한글로 번역</button>
+          </label>
+          <label>정답 <input id="add-hangul" type="text" maxlength="8" placeholder="한글 2–8자"></label>
+          <label>티어
+            <select id="add-tier">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </label>
+        </div>
+        <div class="add-foot">
+          <p id="add-status" class="batch-status"></p>
+          <button id="add-question" class="primary" type="button">질문 추가</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/topics-kpop.js?v=20260912e"></script>
+  <script src="js/topics-kdrama.js?v=20260912e"></script>
+  <script src="js/admin-store.js?v=20260912b"></script>
+  <script src="js/admin.js?v=20260912b"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ module.exports = [
     kind: "drama",
     people: [["Seong Gi-hun","기훈"],["Cho Sang-woo","상우"],["Kang Sae-byeok","새벽"],["Hwang Jun-ho","준호"],["Young-hee","영희"],["Oh Il-nam","일남"],["Jang Deok-su","덕수"],["Ali","알리"],["Front Man","프론트맨"]],
     actors: [["Lee Jung-jae","이정재"],["Park Hae-soo","박해수"],["Jung Ho-yeon","정호연"],["Wi Ha-jun","위하준"],["Oh Young-soo","오영수"]],
-    extra: [["dalgona","The honeycomb candy contest","달고나"],["mugunghwa","Red Light, Green Light’s Korean flower","무궁화",2],["marble","The partner round with glass beads","구슬"],["tug","The team contest on a high platform","줄다리기",2],["bridge","The glass stepping-stone round","징검다리",3],["prize","The cash pile under glass","상금"],["player","Someone who entered the games","참가자",2],["out","Eliminated — a losing player’s fate","탈락"],["netflix","The platform that made it global","넷플릭스",2],["number","Gi-hun’s famous player number","사오육",2]],
+    extra: [["dalgona","The honeycomb candy contest","달고나"],["mugunghwa","Red Light, Green Light’s Korean flower","무궁화",2],["marble","The partner round with glass beads","구슬"],["tug","The team contest on a high platform","줄다리기",2],["bridge","The glass stepping-stone round","징검다리",3],["prize","The cash pile under glass","상금"],["player","Someone who entered the games","참가자",2],["out","Eliminated — a losing player’s fate","탈락"],["netflix","The platform that made it global","넷플릭스",2],["number","Gi-hun’s player number 456, written as Korean number words","사오육",2]],
   },
   {
     key: "winter-sonata", name: "Winter Sonata", hangul: "겨울연가",
@@ -29,7 +29,7 @@ module.exports = [
     kind: "drama",
     people: [["Ri Jeong-hyeok","리정혁"],["Yoon Se-ri","윤세리"],["Seo Dan","서단"],["Gu Seung-jun","구승준"],["Pyo Chi-su","표치수"]],
     actors: [["Hyun Bin","현빈"],["Son Ye-jin","손예진"],["Seo Ji-hye","서지혜"],["Kim Jung-hyun","김정현"]],
-    extra: [["north","Where Se-ri crash-lands","북한"],["south","Where Se-ri’s company is based","남한"],["captain","Ri Jeong-hyeok’s rank","대위"],["paraglide","How Se-ri crosses the border by accident","패러글라이딩",3],["village","The North Korean town that hides her","마을"],["swiss","Country of a later reunion","스위스",2],["tvn","Channel that aired the drama","티빙"],["ost-love","The romance that defined 2019","로맨스",2],["seri-co","Se-ri’s Seoul company world","재벌"],["border","The line she was never meant to cross","분계선",2]],
+    extra: [["north","Where Se-ri crash-lands","북한"],["south","Where Se-ri’s company is based","남한"],["captain","Ri Jeong-hyeok’s rank","대위"],["paraglide","How Se-ri crosses the border by accident","패러글라이딩",3],["village","The North Korean town that hides her","마을"],["swiss","Country of a later reunion","스위스",2],["tvn","tvN cable channel that aired the drama","티비엔"],["ost-love","Hangul spelling of “romance” — the heart of Crash Landing on You","로맨스",2],["seri-co","Se-ri’s Seoul company world","재벌"],["border","The line she was never meant to cross","분계선",2]],
   },
   {
     key: "goblin", name: "Goblin", hangul: "도깨비",
@@ -37,7 +37,7 @@ module.exports = [
     kind: "drama",
     people: [["Kim Shin","김신"],["Ji Eun-tak","은탁"],["Wang Yeo","왕여"],["Kim Sun","김선"],["Sunny","써니"]],
     actors: [["Gong Yoo","공유"],["Kim Go-eun","김고은"],["Lee Dong-wook","이동욱"],["Yoo In-na","유인나"]],
-    extra: [["sword","The blade stuck in the goblin’s chest","칼날"],["reaper","Wang Yeo’s job between life and death","저승사자",3],["chicken","The restaurant Sunny runs","치킨"],["canada","Where Eun-tak later studies","캐나다",2],["goblin-bride","Eun-tak’s fated role","신부"],["immortal","What Kim Shin has been for centuries","불멸"],["tvn","Channel that aired Goblin","티빙"],["ost-stay","A famous Goblin soundtrack mood","잔잔한",2],["house","The shared home of goblin and reaper","공유주택",3],["fate-string","The red thread between them","인연"]],
+    extra: [["sword","The blade stuck in the goblin’s chest","칼날"],["reaper","Wang Yeo’s job between life and death","저승사자",3],["chicken","The restaurant Sunny runs","치킨"],["canada","Where Eun-tak later studies","캐나다",2],["goblin-bride","Eun-tak’s fated role","신부"],["immortal","What Kim Shin has been for centuries","불멸"],["tvn","tvN cable channel that aired Goblin","티비엔"],["ost-stay","Korean word for calm / gentle — the mood of a famous Goblin OST","잔잔한",2],["house","Korean word for a shared house — goblin and reaper’s home","공유주택",3],["fate-string","The red thread between them","인연"]],
   },
   {
     key: "dots", name: "Descendants of the Sun", hangul: "태양의후예",
@@ -53,7 +53,7 @@ module.exports = [
     kind: "drama",
     people: [["Park Sae-ro-yi","새로이"],["Jo Yi-seo","이서"],["Ma Hyun-yi","현이"],["Oh Soo-ah","수아"],["Jang Dae-hee","대희"]],
     actors: [["Park Seo-joon","박서준"],["Kim Da-mi","김다미"],["Kwon Nara","권나라"],["Yoo Jae-myung","유재명"]],
-    extra: [["pub","The bar Sae-ro-yi builds","단밤",2],["itaewon","The Seoul neighborhood of the pub","이태원",2],["janga","The conglomerate he fights","장가"],["expel","Why Sae-ro-yi left school","퇴학"],["revenge","What he cooks for years","복수"],["manager","Yi-seo’s role in the pub","매니저",2],["netflix","Where the world watched it","넷플릭스",2],["soju","Drinks poured in the pub","소주"],["friendship","The staff who become family","의리"],["night","When Itaewon really wakes up","밤거리",2]],
+    extra: [["pub","The bar Sae-ro-yi builds","단밤",2],["itaewon","The Seoul neighborhood of the pub","이태원",2],["janga","The conglomerate he fights","장가"],["expel","Why Sae-ro-yi left school","퇴학"],["revenge","What he cooks for years","복수"],["manager","Yi-seo’s role in the pub","매니저",2],["netflix","Where the world watched it","넷플릭스",2],["soju","Drinks poured in the pub","소주"],["friendship","The staff who become family","의리"],["night","Korean word for a night street — when Itaewon wakes up","밤거리",2]],
   },
   {
     key: "vincenzo", name: "Vincenzo", hangul: "빈센조",
@@ -61,7 +61,7 @@ module.exports = [
     kind: "drama",
     people: [["Vincenzo Cassano","빈센조"],["Hong Cha-young","차영"],["Jang Jun-woo","준우"],["Cho Young-woon","영운"]],
     actors: [["Song Joong-ki","송중기"],["Jeon Yeo-been","전여빈"],["Ok Taecyeon","옥택연"],["Kwak Dong-yeon","곽동연"]],
-    extra: [["mafia","Vincenzo’s Italian family business","마피아",2],["lawyer","Cha-young’s job","변호사",2],["plaza","The building he protects","금가플라자",3],["gold","What is hidden in the plaza","금괴"],["babel","The conglomerate he fights","바벨"],["italy","Country that shaped Vincenzo","이탈리아",3],["tvn","Channel that aired it","티빙"],["pigeon","A bird motif around Vincenzo","비둘기",2],["cassano","His Italian family name, in Hangul","카사노",2],["soot","The messy office Cha-young runs","법률사무소",3]],
+    extra: [["mafia","Vincenzo’s Italian family business","마피아",2],["lawyer","Cha-young’s job","변호사",2],["plaza","The building he protects","금가플라자",3],["gold","What is hidden in the plaza","금괴"],["babel","The conglomerate he fights","바벨"],["italy","Country that shaped Vincenzo","이탈리아",3],["tvn","tvN cable channel that aired it","티비엔"],["pigeon","A bird motif around Vincenzo","비둘기",2],["cassano","His Italian family name, in Hangul","카사노",2],["soot","Hangul for a law office — Cha-young’s messy firm","법률사무소",3]],
   },
   {
     key: "cha-cha-cha", name: "Hometown Cha-Cha-Cha", hangul: "갯마을차차차",
@@ -69,7 +69,7 @@ module.exports = [
     kind: "drama",
     people: [["Yoon Hye-jin","혜진"],["Hong Du-sik","두식"],["Ji Seong-hyun","성현"],["Pyo Mi-seon","미선"]],
     actors: [["Shin Min-a","신민아"],["Kim Seon-ho","김선호"],["Lee Sang-yi","이상이"]],
-    extra: [["gongjin","The seaside village of the story","공진"],["dentist","Hye-jin’s job","치과의사",3],["handyman","Du-sik’s unofficial job","만능해결사",3],["sea","What surrounds Gongjin","바다"],["clinic","Hye-jin’s new office","치과"],["chief","Du-sik’s nickname in town","이장"],["tvn","Channel that aired it","티빙"],["young-guk","A younger villager’s crush era","청춘"],["market","Where town gossip starts","시장"],["boat","How some villagers make a living","배편"]],
+    extra: [["gongjin","The seaside village of the story","공진"],["dentist","Hye-jin’s job","치과의사",3],["handyman","Du-sik’s unofficial job","만능해결사",3],["sea","What surrounds Gongjin","바다"],["clinic","Hye-jin’s new office","치과"],["chief","Du-sik’s nickname in town","이장"],["tvn","tvN cable channel that aired it","티비엔"],["young-guk","A younger villager’s crush era","청춘"],["market","Where town gossip starts","시장"],["boat","Korean word for a boat service / ferry in the village","배편"]],
   },
   {
     key: "attorney-woo", name: "Extraordinary Attorney Woo", hangul: "이상한변호사우영우",
@@ -93,7 +93,7 @@ module.exports = [
     kind: "drama",
     people: [["Lee Young-joon","영준"],["Kim Mi-so","미소"],["Yang Shi-on","시온"],["Kim Sung-yeon","성연"]],
     actors: [["Park Seo-joon","박서준"],["Park Min-young","박민영"],["Lee Tae-hwan","이태환"]],
-    extra: [["secretary","Mi-so’s job for years","비서"],["vice","Young-joon’s company rank","부회장",2],["quit","What Mi-so announces","퇴사"],["narcissist","Young-joon’s personality joke","나르시시스트",3],["brother","A family secret between men","형제"],["tvn","Channel that aired it","티빙"],["coffee","What a secretary is always pouring","커피"],["schedule","Mi-so’s weapon of choice","일정"],["rose","A flower Young-joon keeps sending","장미"],["smile","Mi-so’s given name means this","미소"]],
+    extra: [["secretary","Mi-so’s job for years","비서"],["vice","Young-joon’s company rank","부회장",2],["quit","What Mi-so announces","퇴사"],["narcissist","Young-joon’s personality joke","나르시시스트",3],["brother","A family secret between men","형제"],["tvn","tvN cable channel that aired it","티비엔"],["coffee","What a secretary is always pouring","커피"],["schedule","Mi-so’s weapon of choice","일정"],["rose","A flower Young-joon keeps sending","장미"],["smile","Mi-so’s given name means this","미소"]],
   },
   {
     key: "sky-castle", name: "Sky Castle", hangul: "스카이캐슬",
@@ -109,7 +109,7 @@ module.exports = [
     kind: "drama",
     people: [["Sung Deok-sun","덕선"],["Choi Taek","택"],["Kim Jung-hwan","정환"],["Sung Dong-il","동일"],["Sun-woo","선우"]],
     actors: [["Lee Hye-ri","이혜리"],["Park Bo-gum","박보검"],["Ryu Jun-yeol","류준열"],["Sung Dong-il","성동일"],["Lee Il-hwa","이일화"]],
-    extra: [["ssangmun","The neighborhood alley of the story","쌍문동",2],["baduk","Taek’s genius game","바둑"],["alley","Where the five houses sit","골목"],["family-house","Crowded rooms of 1988","안방"],["baseball","Jung-hwan’s other obsession","야구"],["tvn","Channel that aired it","티빙"],["ramyeon","A late-night kitchen snack","라면"],["tape","Mixtapes passed between kids","카세트",2],["mother","The women who run the alley","어머니",2],["first-snow","Winter in Ssangmun-dong","첫눈"]],
+    extra: [["ssangmun","The neighborhood alley of the story","쌍문동",2],["baduk","Taek’s genius game","바둑"],["alley","Where the five houses sit","골목"],["family-house","Crowded rooms of 1988","안방"],["baseball","Jung-hwan’s other obsession","야구"],["tvn","tvN cable channel that aired it","티비엔"],["ramyeon","A late-night kitchen snack","라면"],["tape","Mixtapes passed between kids","카세트",2],["mother","The women who run the alley","어머니",2],["first-snow","Winter in Ssangmun-dong","첫눈"]],
   },
   {
     key: "hospital-playlist", name: "Hospital Playlist", hangul: "슬기로운의사생활",
@@ -117,7 +117,7 @@ module.exports = [
     kind: "drama",
     people: [["Lee Ik-jun","익준"],["Ahn Jeong-won","정원"],["Kim Jun-wan","준완"],["Yang Seok-hyeong","석형"],["Chae Song-hwa","송화"]],
     actors: [["Jo Jung-suk","조정석"],["Yoo Yeon-seok","유연석"],["Jung Kyung-ho","정경호"],["Kim Dae-myung","김대명"],["Jeon Mi-do","전미도"]],
-    extra: [["band","The five still play music together","밴드"],["hospital","Yulje Medical Center","병원"],["professor","Their rank at the hospital","교수"],["songhwa","The neurosurgeon of the five","송화"],["cd","The music they grew up on","씨디"],["tvn","Channel that aired it","티빙"],["friend99","The year they entered school together","구구년",2],["surgery","What they do between songs","수술"],["night-shift","When the hospital is quietest","당직"],["chicken","Ik-jun’s favorite order","치킨"]],
+    extra: [["band","The five still play music together","밴드"],["hospital","Yulje Medical Center","병원"],["professor","Their rank at the hospital","교수"],["songhwa","The neurosurgeon of the five","송화"],["cd","The music they grew up on","씨디"],["tvn","tvN cable channel that aired it","티비엔"],["friend99","The year they entered school together","구구년",2],["surgery","What they do between songs","수술"],["night-shift","When the hospital is quietest","당직"],["chicken","Ik-jun’s favorite order","치킨"]],
   },
   {
     key: "kingdom", name: "Kingdom", hangul: "킹덤",
@@ -157,7 +157,7 @@ module.exports = [
     kind: "drama",
     people: [["Park Hae-young","해영"],["Cha Soo-hyun","수현"],["Lee Jae-han","재한"]],
     actors: [["Lee Je-hoon","이제훈"],["Kim Hye-soo","김혜수"],["Cho Jin-woong","조진웅"]],
-    extra: [["radio","The device that talks to the past","무전기",2],["detective","All three leads’ job","형사"],["cold-case","Crimes that were never solved","미제사건",3],["profile","Hae-young’s analysis work","프로파일러",3],["tvn","Channel that aired it","티빙"],["past","Where Jae-han still lives","과거"],["future","Where Hae-young answers","미래"],["badge","What the cops carry","배지"],["night-rain","The mood of many Signal scenes","밤비"],["justice","What they still want for victims","정의"]],
+    extra: [["radio","The device that talks to the past","무전기",2],["detective","All three leads’ job","형사"],["cold-case","Crimes that were never solved","미제사건",3],["profile","Hae-young’s analysis work","프로파일러",3],["tvn","tvN cable channel that aired it","티비엔"],["past","Where Jae-han still lives","과거"],["future","Where Hae-young answers","미래"],["badge","What the cops carry","배지"],["night-rain","The mood of many Signal scenes","밤비"],["justice","What they still want for victims","정의"]],
   },
   {
     key: "its-okay", name: "It's Okay to Not Be Okay", hangul: "사이코지만괜찮아",
@@ -165,7 +165,7 @@ module.exports = [
     kind: "drama",
     people: [["Moon Gang-tae","강태"],["Ko Moon-young","문영"],["Moon Sang-tae","상태"],["Lee Sang-in","상인"]],
     actors: [["Kim Soo-hyun","김수현"],["Seo Yea-ji","서예지"],["Oh Jung-se","오정세"]],
-    extra: [["book","Moon-young writes children’s stories","동화"],["caregiver","Gang-tae’s job","보호사",2],["hospital-mind","OK Psychiatric Hospital","정신병원",3],["brother","Sang-tae, who Gang-tae protects","형"],["fairy","The dark tales Moon-young tells","동화작가",3],["tvn","Channel that aired it","티빙"],["castle","A house that looks like a storybook","성"],["trauma","What every patient carries","상처"],["ok","The hospital’s short name","오케이",2],["paint","Sang-tae’s way of speaking","그림"]],
+    extra: [["book","Moon-young writes children’s stories","동화"],["caregiver","Gang-tae’s job","보호사",2],["hospital-mind","OK Psychiatric Hospital","정신병원",3],["brother","Sang-tae, who Gang-tae protects","형"],["fairy","The dark tales Moon-young tells","동화작가",3],["tvn","tvN cable channel that aired it","티비엔"],["castle","A house that looks like a storybook","성"],["trauma","What every patient carries","상처"],["ok","The hospital’s short name","오케이",2],["paint","Sang-tae’s way of speaking","그림"]],
   },
   {
     key: "twenty-five", name: "Twenty-Five Twenty-One", hangul: "스물다섯스물하나",
@@ -173,7 +173,7 @@ module.exports = [
     kind: "drama",
     people: [["Na Hee-do","희도"],["Baek Yi-jin","이진"],["Go Yu-rim","유림"],["Ji Seung-wan","승완"]],
     actors: [["Kim Tae-ri","김태리"],["Nam Joo-hyuk","남주혁"],["Bona","김보라"]],
-    extra: [["fencing","Hee-do’s sport","펜싱"],["reporter","Yi-jin’s later job","기자"],["imf","The crisis years of the story","아이엠에프",3],["coach","Who trains the fencing team","코치"],["tvn","Channel that aired it","티빙"],["diary","How the adult Hee-do looks back","일기"],["gold","What a fencer wants at nationals","금메달",2],["youth","The age in the title","청춘"],["friend-seungwan","Hee-do’s loud best friend","친구"],["radio","Yi-jin’s other job era","라디오",2]],
+    extra: [["fencing","Hee-do’s sport","펜싱"],["reporter","Yi-jin’s later job","기자"],["imf","The crisis years of the story","아이엠에프",3],["coach","Who trains the fencing team","코치"],["tvn","tvN cable channel that aired it","티비엔"],["diary","How the adult Hee-do looks back","일기"],["gold","What a fencer wants at nationals","금메달",2],["youth","The age in the title","청춘"],["friend-seungwan","Hee-do’s loud best friend","친구"],["radio","Yi-jin’s other job era","라디오",2]],
   },
   {
     key: "hotel-del-luna", name: "Hotel Del Luna", hangul: "호텔델루나",
@@ -181,7 +181,7 @@ module.exports = [
     kind: "drama",
     people: [["Jang Man-wol","만월"],["Gu Chan-sung","찬성"],["Gildal","길달"],["Seol-ji","설지"]],
     actors: [["IU","아이유"],["Yeo Jin-goo","여진구"],["P.O","피오"]],
-    extra: [["hotel","A inn for the dead","호텔"],["ghost","The usual guests","귀신"],["moon","Man-wol’s name means full moon","만월"],["ceo","Chan-sung’s new job","사장"],["tvn","Channel that aired it","티빙"],["blue","The hotel’s night color","푸른밤",2],["curse","What binds Man-wol to the inn","저주"],["check-in","What every spirit must do","체크인",2],["key","What opens a guest’s room","열쇠"],["afterlife","Where unfinished souls stay","저승"]],
+    extra: [["hotel","A inn for the dead","호텔"],["ghost","The usual guests","귀신"],["moon","Man-wol’s name means full moon","만월"],["ceo","Chan-sung’s new job","사장"],["tvn","tvN cable channel that aired it","티비엔"],["blue","The hotel’s night color","푸른밤",2],["curse","What binds Man-wol to the inn","저주"],["check-in","What every spirit must do","체크인",2],["key","What opens a guest’s room","열쇠"],["afterlife","Where unfinished souls stay","저승"]],
   },
   {
     key: "alchemy", name: "Alchemy of Souls", hangul: "환혼",
@@ -189,7 +189,7 @@ module.exports = [
     kind: "drama",
     people: [["Jang Uk","장욱"],["Mu-deok","무덕"],["Naksu","낙수"],["Park Dang-gu","당구"],["Seo Yul","서율"]],
     actors: [["Lee Jae-wook","이재욱"],["Jung So-min","정소민"],["Go Youn-jung","고윤정"],["Hwang Min-hyun","황민현"]],
-    extra: [["mage","A fighter who uses energy","술사"],["soul","What can be switched between bodies","환혼"],["sword","Uk’s other weapon","검"],["maid","Mu-deok’s cover in the house","하녀"],["tvn","Channel that aired it","티빙"],["ice-stone","A power source in the lore","얼음정",2],["songrim","A great mage house","송림"],["assassin","What Naksu was trained as","암살자",2],["noble","Uk’s fallen family rank","귀족"],["season-two","A later chapter of the tale","파트투",2]],
+    extra: [["mage","A fighter who uses energy","술사"],["soul","What can be switched between bodies","환혼"],["sword","Uk’s other weapon","검"],["maid","Mu-deok’s cover in the house","하녀"],["tvn","tvN cable channel that aired it","티비엔"],["ice-stone","A power source in the lore","얼음정",2],["songrim","A great mage house","송림"],["assassin","What Naksu was trained as","암살자",2],["noble","Uk’s fallen family rank","귀족"],["season-two","A later chapter of the tale","파트투",2]],
   },
   {
     key: "queen-of-tears", name: "Queen of Tears", hangul: "눈물의여왕",
@@ -197,7 +197,7 @@ module.exports = [
     kind: "drama",
     people: [["Hong Hae-in","해인"],["Baek Hyun-woo","현우"],["Yoon Eun-sung","은성"],["Hong Beom-jun","범준"]],
     actors: [["Kim Soo-hyun","김수현"],["Kim Ji-won","김지원"],["Park Sung-hoon","박성훈"]],
-    extra: [["queen","Hae-in’s place in the department store family","여왕"],["lawyer","Hyun-woo’s job","변호사",2],["store","The Queens Group empire","백화점",2],["marriage","What they are trying to save","결혼"],["tvn","Channel that aired it","티빙"],["illness","A diagnosis that changes everything","병"],["village","Hyun-woo’s hometown Yongdu-ri","용두리",2],["tears","The word in the title","눈물"],["chair","The family seat everyone wants","회장"],["germany","Where Hyun-woo once studied","독일"]],
+    extra: [["queen","Hae-in’s place in the department store family","여왕"],["lawyer","Hyun-woo’s job","변호사",2],["store","The Queens Group empire","백화점",2],["marriage","What they are trying to save","결혼"],["tvn","tvN cable channel that aired it","티비엔"],["illness","A diagnosis that changes everything","병"],["village","Hyun-woo’s hometown Yongdu-ri","용두리",2],["tears","The word in the title","눈물"],["chair","The family seat everyone wants","회장"],["germany","Where Hyun-woo once studied","독일"]],
   },
   {
     key: "lovely-runner", name: "Lovely Runner", hangul: "선재업고튀어",
@@ -205,7 +205,7 @@ module.exports = [
     kind: "drama",
     people: [["Im Sol","솔"],["Ryu Sun-jae","선재"],["Kim Tae-sung","태성"],["Lee Hyung-tae","형태"]],
     actors: [["Byeon Woo-seok","변우석"],["Kim Hye-yoon","김혜윤"],["Song Geon-hee","송건희"]],
-    extra: [["timeslip","How Sol goes back to high school","타임슬립",3],["idol-star","Sun-jae’s job in the present","아이돌"],["fan","What Sol was first","팬클럽",2],["tvn","Channel that aired it","티빙"],["highschool","Where they meet again in the past","고등학교",3],["song-ost","A ballad every fan streamed","선재노래",2],["death","The future Sol wants to stop","죽음"],["diary","Clues from another timeline","일기"],["run","The second half of the Korean title","튀어"],["sunny","Sun-jae’s given-name feel","선재"]],
+    extra: [["timeslip","How Sol goes back to high school","타임슬립",3],["idol-star","Sun-jae’s job in the present","아이돌"],["fan","What Sol was first","팬클럽",2],["tvn","tvN cable channel that aired it","티비엔"],["highschool","Where they meet again in the past","고등학교",3],["song-ost","A ballad every fan streamed","선재노래",2],["death","The future Sol wants to stop","죽음"],["diary","Clues from another timeline","일기"],["run","The second half of the Korean title","튀어"],["sunny","Sun-jae’s given-name feel","선재"]],
   },
   {
     key: "dae-jang-geum", name: "Jewel in the Palace", hangul: "대장금",
@@ -221,7 +221,7 @@ module.exports = [
     kind: "drama",
     people: [["Choi Yu-jin","유진"],["Go Ae-shin","애신"],["Kim Hui-seong","희성"],["Kudo","구도"]],
     actors: [["Lee Byung-hun","이병헌"],["Kim Tae-ri","김태리"],["Yoo Yeon-seok","유연석"],["Kim Min-jung","김민정"]],
-    extra: [["marine","Yu-jin’s American rank","해병"],["noble","Ae-shin’s class","양반"],["joseon-end","The dying years of the dynasty","조선"],["tvn","Channel that aired it","티빙"],["gun","What the righteous army takes up","총기"],["hanok","Ae-shin’s family house","한옥"],["english-name","The title the city gives him","션샤인",2],["independence","What the fighters want","독립"],["photograph","A modern hobby of the era","사진"],["foreign","The powers circling Joseon","열강"]],
+    extra: [["marine","Yu-jin’s American rank","해병"],["noble","Ae-shin’s class","양반"],["joseon-end","The dying years of the dynasty","조선"],["tvn","tvN cable channel that aired it","티비엔"],["gun","What the righteous army takes up","총기"],["hanok","Ae-shin’s family house","한옥"],["english-name","Hangul spelling of “Sunshine,” Eugene’s English name","션샤인",2],["independence","What the fighters want","독립"],["photograph","A modern hobby of the era","사진"],["foreign","The powers circling Joseon","열강"]],
   },
   {
     key: "moving", name: "Moving", hangul: "무빙",
@@ -399,4 +399,4 @@ module.exports = [
     actors: [["Lee Jung-jae","이정재"],["Choi Min-shin","최민식"],["Hwang Jung-min","황정민"],["Park Sung-woong","박성웅"]],
     extra: [["undercover","Ja-sung’s double life","잠입"],["mob","The Goldmoon syndicate","조직"],["boss","The empty chair everyone wants","보스"],["police","The handlers who own Ja-sung","경찰"],["blood-brother","Chung’s loyalty","의리"],["car","A famous tunnel-rage scene","자동차",2],["promotion","What the mob election decides","후계",2],["goldmoon","The company’s public face","골드문",2],["handler","Joong-gu’s police role","상관"],["smile","A final expression that hurts","미소"]],
   },
-];
+].concat(require("./kdrama-facts-more"));

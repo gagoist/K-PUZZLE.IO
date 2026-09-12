@@ -1,78 +1,208 @@
 const fs = require("fs");
 const path = require("path");
-const { kpopShared, dramaShared } = require("./lexicon");
 const kpopFacts = require("./kpop-facts");
 const kdramaFacts = require("./kdrama-facts");
+const kpopFan = require("./kpop-fan");
+const kdramaFan = require("./kdrama-fan");
+
+function loadLore(name) {
+  try {
+    return require(`./${name}`);
+  } catch {
+    return {};
+  }
+}
+
+const kpopLore = Object.assign({}, loadLore("kpop-lore-a"), loadLore("kpop-lore-b"));
+const kdramaLore = Object.assign({}, loadLore("kdrama-lore-a"), loadLore("kdrama-lore-b"));
+const { FAMOUS_PEERS } = kpopFan;
 
 const HANGUL = /^[가-힣]+$/;
+const DROP_EXTRA = new Set([
+  "netflix", "tvn", "kbs", "sbs", "mbc", "jtbc", "ena", "disney", "amazon",
+  "ost-love", "ost-stay", "hallyu-start", "romance",
+]);
 
-function kindItem(topic) {
-  const map = {
-    "girl-group": ["girl-group", `${topic.name} is this kind of act`, "걸그룹", 2],
-    "boy-group": ["boy-group", `${topic.name} is this kind of act`, "보이그룹", 2],
-    solo: ["solo-act", `${topic.name} is this kind of act`, "솔로가수", 2],
-    drama: ["kind-drama", `${topic.name} is a Korean series`, "드라마", 2],
-    movie: ["kind-movie", `${topic.name} is a Korean film`, "영화"],
-  };
-  return map[topic.kind] ?? null;
+function slug(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9가-힣]+/g, "-")
+    .replace(/^-|-$/g, "") || "x";
+}
+
+function parseNamed(row) {
+  const [eng, hangul, a, b] = row;
+  let tier = 1;
+  let clue = "";
+  if (typeof a === "number") {
+    tier = a;
+    if (typeof b === "string") clue = b;
+  } else if (typeof a === "string") {
+    clue = a;
+  }
+  return { eng, hangul, tier, clue };
+}
+
+function pushRow(items, row) {
+  if (!row || !Array.isArray(row) || row.length < 3) return;
+  const [id, clue, hangul] = row;
+  if (!id || !clue || !hangul) return;
+  if (DROP_EXTRA.has(id)) return;
+  items.push(row);
+}
+
+function peerQuestions(topic) {
+  const fan = kpopFan[topic.key];
+  const year = fan?.debut;
+  if (!year) return [];
+  const others = FAMOUS_PEERS.filter((peer) => peer.key !== topic.key && peer.year !== year);
+  const older = others.filter((peer) => peer.year < year).sort((a, b) => b.year - a.year)[0];
+  const younger = others.filter((peer) => peer.year > year).sort((a, b) => a.year - b.year)[0];
+  const out = [];
+  if (older) {
+    out.push([
+      "vs-junior",
+      `${topic.name} debuted in ${year}. Compared with ${older.name} (${older.year}), is ${topic.name} the senior (선배) or the junior (후배)?`,
+      "후배",
+    ]);
+  }
+  if (younger) {
+    out.push([
+      "vs-senior",
+      `${topic.name} debuted in ${year}. Compared with ${younger.name} (${younger.year}), is ${topic.name} the senior (선배) or the junior (후배)?`,
+      "선배",
+    ]);
+  }
+  return out;
+}
+
+function loreKeep(lore, side) {
+  const items = [];
+  if (side === "drama" && Array.isArray(lore.era) && lore.era.length >= 2) {
+    if (HANGUL.test(lore.era[0])) {
+      items.push(["era", `Main era / setting of the story: ${lore.era[1]}`, lore.era[0], lore.era[2] ?? 2]);
+    } else {
+      items.push(lore.era);
+    }
+  }
+  for (const row of lore.programs ?? []) {
+    if (Array.isArray(row) && HANGUL.test(row[0]) && typeof row[1] === "string") {
+      items.push([`prog-${slug(row[0])}`, `${row[1]} — Hangul title of this show`, row[0], row[2] ?? 2]);
+    }
+  }
+  for (const row of lore.quotes ?? []) {
+    if (Array.isArray(row) && HANGUL.test(row[0]) && typeof row[1] === "string") {
+      items.push([`line-${slug(row[0])}`, `${row[1]} — write that Hangul word`, row[0], row[2] ?? 2]);
+    }
+  }
+  for (const extra of lore.extras ?? []) {
+    if (Array.isArray(extra) && extra[0] && !DROP_EXTRA.has(extra[0])) items.push(extra);
+  }
+  return items;
 }
 
 function expandKpop(topic) {
+  const lore = kpopLore[topic.key] || {};
+  const fan = kpopFan[topic.key] || {};
   const items = [];
-  items.push(["self", `The act known as ${topic.name}`, topic.hangul, 2]);
-  if (topic.fandom) items.push(["fandom-name", topic.fandom[1], topic.fandom[0], topic.fandom[2]]);
-  if (topic.agency) items.push(["agency-name", topic.agency[1], topic.agency[0], topic.agency[2]]);
-  if (topic.count) items.push(["member-count", topic.count[1], topic.count[0], topic.count[2]]);
-  const kind = kindItem(topic);
-  if (kind) items.push(kind);
-  for (const [eng, hangul, tier] of topic.members ?? []) {
+
+  items.push(["self", `Hangul spelling of the group / artist name ${topic.name}`, topic.hangul, 2]);
+
+  if (topic.fandom) {
     items.push([
-      `m-${eng.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      `${topic.name} member ${eng}, in Hangul`,
-      hangul,
-      tier,
+      "fandom-name",
+      `Official ${topic.name} fan-club / fandom name, in Hangul`,
+      topic.fandom[0],
+      topic.fandom[2],
     ]);
   }
-  for (const [eng, hangul, tier] of topic.songs ?? []) {
+  if (topic.agency) {
     items.push([
-      `s-${eng.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      `${topic.name} title: “${eng}”`,
-      hangul,
-      tier ?? 2,
+      "agency-name",
+      `Hangul name of the agency that manages ${topic.name}`,
+      topic.agency[0],
+      topic.agency[2],
     ]);
   }
-  for (const extra of topic.extra ?? []) items.push(extra);
+  if (topic.count) {
+    items.push([
+      "member-count",
+      `How many members does ${topic.name} have now? Write the Korean number word, not a digit`,
+      topic.count[0],
+      topic.count[2],
+    ]);
+  }
+
+  const nameHint = {
+    "bts:V": "V’s Korean given name (Taehyung), in Hangul — not the letter V",
+    "bts:Jin": "Jin’s Korean given name (Seokjin), in Hangul",
+    "bts:RM": "Hangul spelling of RM",
+    "bts:J-Hope": "Hangul spelling of J-Hope",
+  };
+
+  for (const row of topic.members ?? []) {
+    const member = parseNamed(row);
+    items.push([
+      `m-${slug(member.eng)}`,
+      nameHint[`${topic.key}:${member.eng}`] || `Hangul name of ${topic.name} member ${member.eng}`,
+      member.hangul,
+      member.tier,
+    ]);
+  }
+
+  for (const row of topic.songs ?? []) {
+    const song = parseNamed(row);
+    items.push([
+      `s-${slug(song.eng)}`,
+      `Hangul title of ${topic.name}’s song “${song.eng}”`,
+      song.hangul,
+      song.tier || 2,
+    ]);
+  }
+
+  for (const extra of topic.extra ?? []) pushRow(items, extra);
+  for (const extra of fan.facts ?? []) pushRow(items, extra);
+  for (const extra of peerQuestions(topic)) pushRow(items, extra);
+  for (const extra of loreKeep(lore, "kpop")) pushRow(items, extra);
   return items;
 }
 
 function expandDrama(topic) {
+  const lore = kdramaLore[topic.key] || {};
+  const fan = kdramaFan[topic.key] || {};
   const items = [];
-  items.push(["self", `The title ${topic.name}, in Hangul`, topic.hangul, 2]);
-  const kind = kindItem(topic);
-  if (kind) items.push(kind);
-  for (const [eng, hangul, tier] of topic.people ?? []) {
+
+  items.push(["self", `Hangul title of ${topic.name}`, topic.hangul, 2]);
+
+  for (const row of topic.people ?? []) {
+    const person = parseNamed(row);
     items.push([
-      `c-${eng.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      `${topic.name} character ${eng}`,
-      hangul,
-      tier,
+      `c-${slug(person.eng)}`,
+      `${person.eng} in ${topic.name} — Hangul name of this character`,
+      person.hangul,
+      person.tier,
     ]);
   }
-  for (const [eng, hangul, tier] of topic.actors ?? []) {
+
+  for (const row of topic.actors ?? []) {
+    const actor = parseNamed(row);
     items.push([
-      `a-${eng.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-      `Star of ${topic.name}: ${eng}`,
-      hangul,
-      tier ?? 2,
+      `a-${slug(actor.eng)}`,
+      `${actor.eng}, who starred in ${topic.name} — Hangul name`,
+      actor.hangul,
+      actor.tier || 2,
     ]);
   }
-  for (const extra of topic.extra ?? []) items.push(extra);
+
+  for (const extra of topic.extra ?? []) pushRow(items, extra);
+  for (const extra of fan.facts ?? []) pushRow(items, extra);
+  for (const extra of loreKeep(lore, "drama")) pushRow(items, extra);
   return items;
 }
 
 function addItem(bucket, used, seenId, item) {
   if (!item) return;
-  const [id, clue, hangul, tier = 1] = item;
+  const [id, clue, hangul, tier = 1, clueKo = ""] = item;
   if (!id || !clue || !hangul) return;
   if (seenId.has(id)) return;
   if (!HANGUL.test(hangul)) return;
@@ -81,18 +211,17 @@ function addItem(bucket, used, seenId, item) {
   if (used.has(hangul)) return;
   seenId.add(id);
   used.add(hangul);
-  bucket.push(tier === 1 ? [id, clue, hangul] : [id, clue, hangul, tier]);
+  const row = [id, clue, hangul];
+  if (tier !== 1 || clueKo) row.push(tier);
+  if (clueKo) row.push(clueKo);
+  bucket.push(row);
 }
 
-function assemble(topic, uniqueItems, shared) {
+function assemble(topic, uniqueItems) {
   const items = [];
   const used = new Set();
   const seenId = new Set();
   uniqueItems.forEach((item) => addItem(items, used, seenId, item));
-  shared.forEach((row) => {
-    const [id, clue, hangul, tier] = row;
-    addItem(items, used, seenId, [id, clue.replaceAll("{name}", topic.name), hangul, tier]);
-  });
   const beginner = items.filter((item) => [...item[2]].length <= 4 && (item[3] ?? 1) <= 2).length;
   return { items, beginner };
 }
@@ -115,13 +244,13 @@ ${lines}
   return `const ${varName} = [\n${body}\n];\n`;
 }
 
-function buildSide(facts, expand, shared, label) {
+function buildSide(facts, expand, label) {
   const out = [];
   const problems = [];
   for (const topic of facts) {
-    const { items, beginner } = assemble(topic, expand(topic), shared);
-    if (items.length < 100) problems.push(`${label}/${topic.key}: ${items.length} items`);
-    if (beginner < 20) problems.push(`${label}/${topic.key}: beginner ${beginner}`);
+    const { items, beginner } = assemble(topic, expand(topic));
+    if (items.length < 18) problems.push(`${label}/${topic.key}: ${items.length} items`);
+    if (beginner < 6) problems.push(`${label}/${topic.key}: beginner ${beginner}`);
     const keys = new Set(out.map((t) => t.key));
     if (keys.has(topic.key)) problems.push(`${label} duplicate key ${topic.key}`);
     out.push({
@@ -129,16 +258,16 @@ function buildSide(facts, expand, shared, label) {
       name: topic.name,
       hangul: topic.hangul,
       blurb: topic.blurb,
-      items: items.slice(0, 100),
+      items,
     });
   }
-  if (facts.length !== 50) problems.push(`${label} topic count ${facts.length} (want 50)`);
+  if (facts.length !== 100) problems.push(`${label} topic count ${facts.length} (want 100)`);
   return { out, problems };
 }
 
 function main() {
-  const kpop = buildSide(kpopFacts, expandKpop, kpopShared(), "k-pop");
-  const drama = buildSide(kdramaFacts, expandDrama, dramaShared(), "k-drama");
+  const kpop = buildSide(kpopFacts, expandKpop, "k-pop");
+  const drama = buildSide(kdramaFacts, expandDrama, "k-drama");
   const problems = [...kpop.problems, ...drama.problems];
   if (problems.length) {
     console.error(problems.join("\n"));
@@ -148,7 +277,12 @@ function main() {
   const jsRoot = path.join(__dirname, "..", "js");
   fs.writeFileSync(path.join(jsRoot, "topics-kpop.js"), emit("KPOP_TOPICS", kpop.out), "utf8");
   fs.writeFileSync(path.join(jsRoot, "topics-kdrama.js"), emit("KDRAMA_TOPICS", drama.out), "utf8");
-  console.log(`k-pop ${kpop.out.length} topics, k-drama ${drama.out.length} topics`);
+  const kMin = Math.min(...kpop.out.map((t) => t.items.length));
+  const dMin = Math.min(...drama.out.map((t) => t.items.length));
+  const kAvg = Math.round(kpop.out.reduce((s, t) => s + t.items.length, 0) / kpop.out.length);
+  const dAvg = Math.round(drama.out.reduce((s, t) => s + t.items.length, 0) / drama.out.length);
+  console.log(`k-pop ${kpop.out.length} topics (min ${kMin}, avg ${kAvg})`);
+  console.log(`k-drama ${drama.out.length} topics (min ${dMin}, avg ${dAvg})`);
   console.log(problems.length ? "wrote with errors" : "ok");
 }
 
